@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CURRENCY RATE SHEET APPLICATION</title><link rel="stylesheet" href="style.css">
+     <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ+7PAQdTRAPj7mZmlWqKU67Fwqpz5v5y2/PA7fg0EoApmJhdJ6iBhJ6hgnl" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container" id="container" style="position: absolute; left: 0;  transform: translateY(-50%);">
+        <div class="header" id="header">
+            <img src="OEC Logo .jpg" alt="Company Logo" class="logo" style="width: 350px; height: 150px;" id="companyLogo">
+
+            <script>
+                function adjustLogoSize() {
+                    if (window.matchMedia("(orientation: portrait)").matches) {
+                        document.getElementById("companyLogo").style.width = "700px";
+                        document.getElementById("companyLogo").style.height = "200px";
+                    } else {
+                        document.getElementById("companyLogo").style.width = "350px";
+                        document.getElementById("companyLogo").style.height = "150px";
+                    }
+                }
+            
+                window.addEventListener("resize", adjustLogoSize);
+                adjustLogoSize(); // Call initially to set correct size
+            </script>
+            
+            <div class="company-info" style="font-size: 1.5em; font-weight: bold;">
+                <h2 id="title" class="mt-5 text-center"  style="margin-top: 50px;">ORIENT EXCHANGE CO.(LLC)</h2>
+    
+                <!-- Branch Description Section -->
+                <p id="branch-description" class="mx-auto text-center" style="font-size: 1.5em; font-family: 'Times New Roman', Times, serif; line-height: 1.5; opacity: 0; transform: scale(0.8); animation: zoomIn 1.5s ease-out forwards;">
+                  <span id="branch-name-display" style="display: inline-block; opacity: 0; animation: zoomInBranchName 2s ease-out forwards;">Loading... </span>
+                  <strong>&nbsp; BRANCH </strong>
+                </p>
+
+
+                <div class="update-info">
+                 
+                </div>
+                
+                
+                <style>
+                @keyframes zoomIn {
+                    0% {
+                        opacity: 0;
+                        transform: scale(0.8);
+                    }
+                    50% {
+                        opacity: 0.5;
+                        transform: scale(1.1);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+                
+                @keyframes zoomInBranchName {
+                    0% {
+                        opacity: 0;
+                        transform: scale(0.8);
+                    }
+                    60% {
+                        opacity: 0.7;
+                        transform: scale(1.1);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+                </style>
+            </div>
+       
+        </div>
+     
+        <div class="exchange-rate-table">
+            <div class="exchange-rate-header text-center mt-4 mb-3 fs-1 fs-md-2 fs-lg-3" style="font-weight: bold;">
+                CURRENCY RATE SHEET
+              </div>
+              
+
+            <div class="flip-container">
+            <div class="flip-card">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead id="head">
+                        <tr>
+                          <th id="currency" style="text-align: center;">CURRENCY</th>
+                          <th style="text-align: center;">BUY RATE</th>
+                          <th style="text-align: center;">SELL RATE</th>
+                          <th style="text-align: center;">TT RATE</th>
+                        </tr>
+                      </thead>
+                      <tbody id="country-rates-body">
+                        <!-- Table rows will be added dynamically here -->
+                      </tbody>
+                    </table>
+                  </div>
+        </div>
+</div>
+
+
+
+
+
+        </div>
+        
+    </div>
+    
+    <div class="advertisement-right" id="advertisement-right" style="display: none;">
+        <img id="ad-image" src="" alt="Advertisement Image" class="img-fluid" style="margin-right: -5px;">
+      </div>
+      
+
+<!-- Bottom advertisement (visible only in portrait mode) -->
+<div id="advertisement-bottom" >
+    <img id="bottom-ad-image" src="" alt="Advertisement Image" style="width: 100%; height: 350px;">
+</div>
+
+
+
+
+
+
+<script>
+
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const branchName = localStorage.getItem("branchName");
+    const adContainer = document.getElementById("advertisement-right");
+
+    if (!branchName) return;
+
+    try {
+        // Fetch interval time
+        const intervalResponse = await fetch("http://localhost:5000/get-interval");
+        const intervalData = await intervalResponse.json();
+        const displayInterval = intervalData.interval || 5000; // Default to 5 seconds if not provided
+
+        // Fetch media files
+        const response = await fetch(`http://localhost:5000/get-files?branchName=${branchName}`);
+        const data = await response.json();
+
+        if (data.files && data.files.length > 0) {
+            adContainer.style.display = "block"; // Show the ad container
+            let validMedia = [];
+
+            // Function to check media dimensions
+            function checkMediaSize(mediaUrl) {
+                return new Promise((resolve) => {
+                    const extension = mediaUrl.split(".").pop().toLowerCase();
+
+                    if (["jpg", "jpeg", "png", "gif"].includes(extension)) {
+                        // Check image dimensions
+                        const img = new Image();
+                        img.src = mediaUrl;
+                        img.onload = function () {
+                            if ((img.width === 640 && img.height === 992) || (img.width === 648 && img.height === 1152)) {
+                                validMedia.push({ url: mediaUrl, type: "image" });
+                            }
+                            resolve();
+                        };
+                        img.onerror = () => resolve();
+                    } else if (extension === "mp4") {
+                        // Check video dimensions
+                        const video = document.createElement("video");
+                        video.src = mediaUrl;
+                        video.onloadedmetadata = function () {
+                            if ((video.videoWidth === 640 && video.videoHeight === 992) || (video.videoWidth === 648 && video.videoHeight === 1152)) {
+                                validMedia.push({ url: mediaUrl, type: "video" });
+                            }
+                            resolve();
+                        };
+                        video.onerror = () => resolve();
+                    } else {
+                        resolve(); // Skip unsupported files
+                    }
+                });
+            }
+
+            // Process all media and start the slideshow
+            Promise.all(data.files.map(checkMediaSize)).then(() => {
+                if (validMedia.length > 0) {
+                    let index = 0;
+
+                    function changeMedia() {
+                        adContainer.innerHTML = ""; // Clear previous content
+                        const media = validMedia[index];
+
+                        if (media.type === "image") {
+                            const img = document.createElement("img");
+                            img.src = media.url;
+                            img.alt = "Advertisement";
+                            img.style.maxWidth = "100%";
+                            adContainer.appendChild(img);
+                        } else if (media.type === "video") {
+                            const video = document.createElement("video");
+                            video.src = media.url;
+                            video.autoplay = true;
+                            video.loop = true;
+                            video.muted = true;
+                            video.style.maxWidth = "100%";
+                            adContainer.appendChild(video);
+                        }
+
+                        index = (index + 1) % validMedia.length; // Loop through media
+                    }
+
+                    changeMedia(); // Show first media immediately
+                    setInterval(changeMedia, displayInterval);
+                } else {
+                    console.log("No valid media found");
+                }
+            });
+        }
+    } catch (error) {
+        console.error("Error fetching media or interval:", error);
+    }
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="update-info" id="update-info" style="background-color: transparent; border: 1px solid transparent; padding: 10px; border-radius: 5px; box-shadow: 0 6px 12px transparent; font-size: 14px; opacity: 0; transform: translateY(20px); animation: fadeInBounce 1s ease-out forwards; position: fixed; bottom: 70px; right: 20px; text-align: center; width: 100%; max-width: 300px;">
+    <p><strong></strong></p>
+    <p class="date-display" id="currentDate"></p>
+    <p id="lastSavedTime"></p> 
+</div> -->
+
+<style>
+  /* Media Query for responsiveness */
+  @media (max-width: 768px) {
+    #update-info {
+      font-size: 12px; /* Smaller font size on smaller screens */
+      width: 90%;      /* Adjust width on smaller screens */
+      right: 10px;     /* Adjust right position on smaller screens */
+    }
+  }
+</style>
+
+
+
+    <!-- Footer Section -->
+    <!-- <div class="marquee">Welcome to Orient Exchange! Where Service Is Our Priority</div> -->
+    <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #5576d1; color: white; text-align: center; font-family: Arial, sans-serif; border-top: 5px solid #ff7f00; display: flex; justify-content: space-between; align-items: center; padding: 25px 10px; box-sizing: border-box;">
+        <!-- Left section for current date and time -->
+        <div class="text-white fw-bold text-center" style="font-size: 1rem; font-weight: bolder;" >
+            <span id="currentDateTime" class="fs-6 fs-sm-5 fs-md-4 fs-lg-3 fs-xl-2"></span>
+          </div>
+          
+        <!-- Marquee section -->
+        <p class="mb-0" style="font-size: 20px; flex-grow: 1; text-align: center; margin: 0;">
+            <marquee id="marqueeText" behavior="scroll" direction="left" scrollamount="6" style="font-size: 20px; color: #ffffff; width: 100%; font-weight: bolder;">
+                Loading...
+            </marquee>
+        </p>
+    </footer>
+    
+    <script>
+        // Function to update the current date and time
+        function updateDateTime() {
+            const currentDate = new Date();
+            const options = { 
+                weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', 
+                hour: 'numeric', minute: 'numeric', hour12: true 
+            };
+            const dateTimeString = `As On : ${currentDate.toLocaleString('en-US', options)}`;
+            document.getElementById("currentDateTime").textContent = dateTimeString;
+        }
+    
+        // Initial call to set the date and time immediately
+        updateDateTime();
+    </script>
+    
+    
+    <!-- Bootstrap CSS (ensure you have this linked in your document) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Optional Bootstrap JS for other functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+
+    <script>
+   
+
+
+        
+      </script> 
+ 
+    
+<script type="module" src="">
+    const { ipcRenderer } = require('electron');
+
+const refreshButton = document.getElementById('refreshButton');
+refreshButton.addEventListener('click', () => {
+  ipcRenderer.send('refresh-page');  // Send event to main process to refresh the page
+});
+
+</script>
+
+    <script src="demo.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

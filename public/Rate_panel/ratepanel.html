@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch & Country Exchange Rate Selector</title>
+    <link rel="stylesheet" href="ratestyles.css">
+    
+  <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+    <div class="logo" style="position: absolute; top: 20px; left: 20px; width: 350px; height: 100px;">
+        <img src="OEC Logo .jpg" alt="" style="width: 200px; height: 100px;">
+      </div>
+      
+      
+    <button class="go-back-btn" onclick="window.history.back()" style=" font-family: 'Saira', sans-serif;">Go Back</button>
+
+
+
+    <div class="container">
+
+      <div id="statusMessage" style="display:none; padding: 10px; background-color: #d4edda; color: #155724; margin-top: 10px; border-radius: 5px;"></div>
+
+        
+        <!-- Display the branch name -->
+        <div class="selector">
+            <label for="branch" style=" font-family: 'Saira', sans-serif;" > <i> WELCOME : </label>
+            <span id="branchName" style=" font-family: 'Saira', sans-serif;" ></span>   <label id="branchName" style=" font-family: 'Saira', sans-serif;">BRANCH</label> </i>
+        </div>
+
+
+
+
+        <div id="ratesTable" style="margin-top: 20px; font-family: 'Saira', sans-serif;"></div>
+
+        <!-- <button onclick="getRates()">Get Rates</button> 
+        <button onclick="ClearSelectedCountries()">Refresh()</button>
+        <button class="save-button">SAVE</button> -->
+        <!-- <button onclick="saveChanges()">Save Changes</button> -->
+
+        
+    </div>
+
+         <div id="toast" style="
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: 30px;
+    font-size: 16px;
+    font-family: 'Saira', sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+"></div>
+
+      
+  
+<!-- <button class="csv-button" onclick="document.getElementById('csvFileInput').click()" style="font-family: 'Saira', sans-serif;">Upload</button>
+<input type="file" id="csvFileInput" accept=".csv" style="display:none" onchange="readCSV(event)">
+
+
+ 
+<button class="download-button" onclick="downloadCSV()" style="font-family: 'Saira', sans-serif;">Download</button> -->
+
+
+    <script src="ratescript.js"></script>
+</body>
+</html>

@@ -1,0 +1,2319 @@
+@keyframes fadeInBackground {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background: url('your-background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: #e3f2fd;
+    animation: fadeInBackground 1s ease-in-out;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    zoom: 0.8;
+    overflow: hidden; /* This hides the scrollbars */
+    
+    
+}
+
+
+
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.container {
+    width: 95% ;
+    max-width: 160px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 3px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    top: 49% !important;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Soft border with transparency */
+}
+
+
+
+
+
+
+  @media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .company-info, .update-info {
+        font-size: 14px;
+    }
+
+    .marquee {
+        font-size: 1rem;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        width: 80px;
+    }
+
+    .company-info,
+    .update-info {
+        font-size: 12px;
+    }
+
+    .marquee {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    .exchange-rate-header {
+        font-size: 18px;
+    }
+
+ 
+}
+
+/* Larger Screen Styles (min-width: 1200px) */
+@media (min-width: 1200px) {
+    .container {
+        width: 92vw; /* Set width to 80% of viewport width */
+        height: 1300px;
+        max-width: none; /* Remove max-width constraint */
+    }
+
+    .logo {
+        width: 120px; 
+    }
+
+    .company-info {
+        font-size: 20px;
+    }
+
+    .update-info {
+        font-size: 16px;
+    }
+
+    .marquee {
+        font-size: 1.5rem;
+    }
+
+    table {
+        font-size: 22px;
+    }
+
+    .exchange-rate-header {
+        font-size: 24px;
+        
+      
+    }
+    
+}
+
+
+
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-bottom: 2px solid #333;
+    background: linear-gradient(to right, #5576d1,#5576d1);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 140px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.company-info {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: color 0.3s ease;
+    /* margin-right: -500px; */
+    letter-spacing: 10px;
+}
+
+.company-info:hover {
+    color: #ffffff;
+}
+
+.update-info {
+    font-size: 14px;
+    color: #fff;
+    text-align: right;
+    font-style: italic;
+}
+
+/* Exchange Rate Table */
+.exchange-rate-table {
+    margin-top: -5px;
+    background:#e3f2fd;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    height: 1050px;
+    
+}
+
+.exchange-rate-header {
+    background: linear-gradient(to right, #5576d1,#5576d1);
+    color: white;
+    padding: 20px 0;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+    letter-spacing: 35px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    
+    overflow: hidden;
+    margin-top: 1px;
+    background-color: #ffffff;
+}
+
+th, td {
+    padding: 0;
+    font-size: 38px;
+    font-weight: bold;
+    border-bottom: 1px solid #dfdfdf77;
+    
+}
+
+
+
+
+@media screen and (orientation: portrait) {
+    th:nth-child(2),
+    th:nth-child(3),
+    th:nth-child(4),
+    td:nth-child(2),
+    td:nth-child(3),
+    td:nth-child(4) {
+        text-align: center !important;
+        width: 600px;
+    }
+
+    td img {
+        margin-right: 20px; /* Adjust the space between the image and text */
+    }
+}
+
+
+th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+tr:hover {
+    background-color: #e3f2fd;
+}
+
+
+
+
+.flag {
+    width: 115px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.date-display {
+    font-weight: bolder;
+    color: #ffffff;
+    zoom: 1.2;
+}
+
+
+
+@media (orientation: portrait) {
+    .container {
+        width: 100vw; /* Set the container width to 100% of the viewport width */
+        padding: 10px; /* Adjust padding */
+        margin-top: 590px;
+        zoom: 0.6;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        width: 120px;
+    }
+
+    .company-info, .update-info {
+        font-size: 18px;
+    }
+
+    .marquee {
+        font-size: 1.2rem;
+        padding: 8px;
+    }
+
+    table {
+        font-size: 16px;
+    }
+}
+
+
+
+
+/* Advertisement Style - Fixed to the right center */
+.advertisement-right {
+    position: fixed;
+    top: 4%;
+    margin-top: 580px;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 500px;
+    max-width: 100%; /* Ensure it doesn’t exceed the parent width */
+    height: auto; /* Adjust height based on content */
+    background-color: transparent;
+    box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.advertisement-right img{
+    margin-top: 50px ;
+    position: fixed;
+    right: -10px;
+}
+
+
+/* Zoom out effect for 1366x768 screens */
+
+/* @media (max-width: 1366px) {
+    .advertisement-right {
+        transform: translateY(-50%) scale(0.8); 
+        height: 1300px;
+
+    }
+
+
+    .container {
+        transform: scale(0.9); 
+       
+    }
+} */
+
+
+/* Style the image inside the advertisement */
+.advertisement-right img {
+    max-width: 100%; /* Image resizes based on container */
+    height: 1200px; /* Maintain aspect ratio */
+    border-radius: 50px; /* Apply rounded corners */
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (orientation: portrait) {
+    .exchange-rate-table {
+        height: 3050px;
+        background-color: white;
+    }
+}
+
+
+
+
+/* Hide advertisement in portrait mode */
+@media (orientation: portrait) {
+    .advertisement-right {
+        display: none; /* Hide ad in portrait mode */
+    }
+
+
+
+    .container {
+        width: 95%;
+        max-width: 2600px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+        backdrop-filter: blur(10px); /* Apply blur effect */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 3px 5px rgba(0, 0, 0, 0.05);
+        border-radius: 15px;
+        overflow: hidden;
+        margin-top: 100px; /* Add gap from the top */
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Soft border with transparency */
+        position: absolute; /* Position relative to the viewport */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto; /* This centers the container */
+        height: 3100px;
+    }
+
+    .header{
+        height: 400px;
+    }
+    .logo {
+
+        width: 350px;
+        height: 200px;
+        
+    }
+    
+}
+
+
+
+/* Advertisement Style - Fixed to the bottom */
+.advertisement-bottom {
+    position: fixed; /* Keep the ad fixed at the bottom of the screen */
+    bottom: 100px; /* Create a gap of 20px from the bottom edge of the screen */
+    left: 50%; /* Center the ad horizontally */
+    transform: translateX(-50%); /* Adjust positioning for exact centering */
+    width: calc(75% - 10px); /* Match the container width (95% of the screen minus padding) */
+    max-width: 3600px; /* Match the container's max-width */
+    height: 850px; /* Adjust height of the bottom ad */
+    background-color: #f5f5f5; /* Optional background color */
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 10; /* Ensure ad is above the content */
+     /* Initially hidden, will show in portrait or mobile */
+}
+
+
+
+/* Style the image inside the advertisement */
+
+
+
+
+
+
+
+/* Hide advertisement in portrait mode */
+@media (orientation: portrait) {
+    .advertisement-right {
+        display: none; /* Hide ad in portrait mode */
+    }
+    
+    .advertisement-bottom {
+        visibility: visible; /* Show bottom ad in portrait mode */
+    }
+
+    
+
+    .update-info {
+        display: block; /* Ensure update-info remains visible */
+        position: fixed; /* Fix it to the right side */
+        top: 1%; /* Adjust vertical position */
+        right: 600px; /* Set to the right side */
+        width: 300px; /* Set width of the update-info container */
+        z-index: 10; /* Make sure it stays above other content */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        background-color: #ffffff; /* Optional background color */
+        border: 1px solid #ddd; /* Optional border */
+        padding: 20px; /* Padding for content */
+        border-radius: 8px; /* Rounded corners */
+    }
+
+    .container {
+        margin-top: -200px;
+    }
+    .company-info h2{
+        font-size: 60px;
+        /* margin-left: 320px; */
+        /* margin-right: -600px; */
+        letter-spacing: 10px;
+    }
+
+
+   .company-info p {
+        position: absolute;
+        left: 890px; /* Adjust as needed */
+        top: 10%; 
+        font-size: larger;
+        text-align: left;
+        background-color: transparent;
+    }
+     td {
+        font-size: 55px;
+        font-weight: bold;
+        
+    }
+    th{
+        font-size: 40px;
+    }
+    .flag {
+        width: 200px;
+        height: 150px;
+        float: left; /* Aligns the element to the left */
+    }
+    
+    .exchange-rate-table {
+   
+        height: 3200px;
+    }
+    
+    .exchange-rate-header{
+        padding: 20PX;
+        font-size: 60PX;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Hide bottom advertisement in landscape mode */
+/* Landscape Mode - Stick container to the left */
+@media (orientation: landscape) {
+    .container {
+        margin-left: 50px; /* Align the container to the left */
+        margin-right: auto; /* Remove any right margin */
+    }
+
+    .advertisement-bottom {
+        visibility: hidden; /* Hide bottom ad in landscape mode */
+    }
+}
+
+
+
+.update-info {
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px transparent;
+    width: 300px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInBounce 1s ease-out forwards;
+}
+
+@keyframes fadeInBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.update-info p {
+    margin: -1px 0;
+    font-size: 1.2em;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: -1.5;
+}
+
+.update-info p strong {
+    font-weight: bold;
+    color: #007BFF; /* Blue color for emphasis */
+}
+
+.date-display {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #4CAF50; /* Green color for the date */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#lastSavedTime {
+    font-size: 1em;
+    color: #888;
+    font-style: italic;
+}
+
+@media screen and (max-width: 480px) {
+    .update-info {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+
+
+
+
+
+
+/* Slide animation for moving rows */
+.move-to-bottom {
+    animation: slideDown 1s forwards;
+}
+
+/* Fade-in animation for newly added rows */
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Define slideDown animation */
+@keyframes slideDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100%); /* Moves row to bottom */
+        opacity: 0;
+    }
+}
+
+/* Define fadeIn animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Ensure stable height for table body to prevent layout shifts */
+#country-rates-body {
+    height: 30px; /* Set a fixed height for the table body */
+    overflow-y: auto; /* Enable scrolling if needed */
+}
+
+
+
+
+
+
+/* 
+
+@media (width: 1024px) and (height: 600px) {
+    body {
+        zoom: 50%;
+    }
+    .container{
+        width: 100%;
+    }
+} */
+
+
+
+/* 
+@media screen and (orientation: landscape) and (max-width: 1920x) and (min-height: 1080px) {
+    #description{
+        font-size: 2px !important;
+    }
+} */
+
+
+@media screen and (orientation: portrait) and (max-width: 1080px) and (min-height: 1920px) {
+.container{
+    margin-top: -400px !important;
+    margin-left: -20px !important;
+}
+
+
+
+}
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1920px) and (min-height: 1080px) {
+
+    .company-info {
+      
+        margin-top: 1010px !important;
+        /* margin-right: 600px !important; */
+    }
+
+    }
+    
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1768px) and (min-height: 992px) {
+    
+
+    .th, td{
+        font-size: 35px !important;
+    }
+    .flag{
+        width: 75px !important;
+        height: 75px !important;
+    }
+    .advertisement-bottom{
+        display: none !important;
+    }
+    
+
+    .advertisement-right{
+        width: 450px !important;
+    }
+
+.advertisement-right img {
+    max-width: 100% !important;
+    height: 1100px !important;
+    border-radius: 50px !important;
+}
+
+
+.company-info{
+    /* margin-right: 350px !important; */
+    letter-spacing: 5px !important;
+    margin-top: 920px;
+}
+.container{
+    top: 47% !important;
+}
+   
+}
+
+
+
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 992px) and (min-height: 1768px) {
+    
+
+    .th, td{
+        font-size: 50px !important;
+    }
+    .flag{
+        width: 145px !important;
+        height: 145px !important;
+    }
+
+    .container{
+        top: 44% !important;
+        left: -1% !important;
+    }
+    .header{
+        height: 480px !important;
+    }
+
+
+    
+    .company-info p {
+        top: 700px !important;
+        left: 500px !important;
+        margin-top: 1px !important;
+        margin-left: -30px !important;
+    
+    }
+   
+}
+
+
+#branch-name-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh; /* Make sure the container takes the full height of the screen */
+  }
+  
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 768px) {
+    
+
+    
+  
+    .advertisement-bottom{
+        display: none !important;
+    }
+    
+
+
+    .company-info {
+letter-spacing: 4px;
+margin-left: 230px;
+margin-bottom: 660px;
+    }
+
+    .advertisement-right{
+        right: -4px !important;
+    
+    }
+
+
+
+
+.advertisement-right img {
+    max-width: 95% !important;
+    height: 1100px !important;
+    
+    border-radius: 50px !important;
+    right: 5px !important;
+}
+
+
+
+
+   
+}
+
+
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 768px) and (min-height: 1280px) {
+
+td{
+    font-size: 35px !important;
+}
+
+
+
+.flag{
+    height: 93px;
+    width: 98px;
+}
+
+
+.logo{
+    width: 500px !important;
+}
+
+
+
+.company-info p {
+    
+    top: 400px !important;
+    left: 600px;
+
+}
+
+
+#advertisement-bottom{
+   background-color: #007BFF;
+   height: 170px !important;
+
+}
+#bottom-ad-image{
+height: 170px !important;
+
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 720px) {
+    
+th{
+    font-size: 20px;
+}
+    td{
+        font-size: 25px !important;
+    }
+    .flag{
+        width: 65px !important;
+        height: 50px !important;
+    }
+   .container{
+    margin-top: 250px !important;
+    left: -30px !important;
+   }
+   .header{
+    height: 80px;
+   }
+   .logo{
+    width: 200px !important;
+    height: 100px !important;
+   }
+
+.exchange-rate-header{
+    font-size: 20px !important;
+}
+   .company-info h2{
+    font-size: 16px !important;
+    
+    
+   }
+
+   .company-info p {
+    font-size: 15px !important;
+   }
+
+   
+.advertisement-right{
+    height: 795px !important;
+    width: 330px !important;
+    margin-top: 380px !important;
+}
+
+.advertisement-right img{
+    height: 750px !important;
+    top: -38px !important;
+}
+}
+
+
+
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 720px) and (min-height: 1280px) {
+
+    .container{
+        margin-top: -50px !important;
+    }
+    .company-info p {
+        left: 550px !important;
+        margin-top: -63.5px !important;
+        
+    }
+
+
+    td{
+     font-size: 23px !important;
+     font-size: smaller !important;
+    }
+
+    .header{
+        height: 330px !important;
+    }
+
+}
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 1024px) {
+
+    .container{
+        top: 500px !important;
+        
+        
+        
+    }
+    .flag{
+        width: 1px !important;
+    }
+
+    .logo{
+        display: block !important;
+    
+        
+    }
+    .company-info{
+        letter-spacing:2.9px !important;
+            
+    }
+
+    #advertisement-right{
+        
+        bottom: 250px !important;
+        margin-top: 490px !important;
+        height: 890px !important;
+        margin-right: 50px !important;
+  
+    }
+
+    #ad-image{
+        height: 850px !important;
+        width: 380px !important;
+       
+        
+    }
+  
+
+    td{
+        font-size:  20px !important;
+    }   
+
+    .company-info{
+        margin-top: -100px;
+        margin-bottom: 690px !important;
+        
+       
+        
+    }
+    .company-info h2{
+        margin-left: 120px !important;
+    }
+    .company-info p {
+        margin-left: 100px !important;
+    }
+
+}
+
+@media screen and (orientation: portrait) and (max-width: 1024px) and (min-height: 1280px) {
+
+
+    th{
+        font-size: 40px !important;
+    }
+    td{
+        font-size: 51px !important;
+    }
+    .flag{
+        height: 94px;
+        width: 150px;
+    }
+    
+
+    .container{
+        margin-top: 440px !important;
+    }
+
+    .logo{
+        width: 550px !important;
+    }
+
+    .header{
+        height: 365px;
+    }
+    .exchange-rate-header{
+        height: 65px !important;
+    }
+    
+
+    
+    }
+    
+    
+
+
+    @media screen and (orientation: portrait) and (max-width: 800px) and (min-height: 1280px) {
+       .container{
+        margin-top: -25px !important;
+       }
+
+       .header{
+        height: 85px !important;
+       }
+
+       .logo{
+        margin-top: 90px !important;
+       }
+
+       .update-info p{
+        margin-bottom: -25px;
+       }
+       .company-info p {
+        margin-top: -20px !important;
+        left: 650px !important;
+       }
+       
+
+    }
+
+    @media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 800px) {
+    .company-info{
+        margin-bottom: 650px;
+    }
+    }
+
+
+    @media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 960px) {
+
+
+        th{
+            font-size: 20px !important;
+        }
+        td{
+            font-size: 20px !important;
+        }
+        .flag{
+            height: 94px;
+            width: 150px;
+        }
+        
+    
+        .container{
+            margin-top: 440px !important;
+            
+        }
+    
+        .logo{
+            width: 550px !important;
+        }
+    
+        .header{
+            height: 365px;
+        }
+        .exchange-rate-header{
+            height: 65px !important;
+        }
+        #advertisement-right{
+            top: 150px !important;
+            height: 1050px !important;
+            margin-right: -20px !important;
+            width: 350px !important;
+        }
+    
+        #ad-image{
+            height: 1000px !important;
+            top: 10px !important;
+            display: block !important;
+            
+            right: -20px !important;
+            width: 350px !important;
+            
+        }
+        .company-info{
+            margin-bottom: 660px !important;
+            zoom: 0.8;
+
+        }
+
+        .company-info h2{
+            margin-left: 130px;
+        }
+
+        
+    
+     
+        
+        }
+    
+        
+
+
+
+        @media screen and (orientation: portrait) and (max-width: 960px) and (min-height: 1280px) {
+
+
+            th{
+                font-size: 40px !important;
+            }
+            td{
+                font-size: 35px !important;
+            }
+            .flag{
+                height: 100px;
+                width: 150px;
+            }
+
+            .logo{
+                height: 200px !important;
+                top: -80px !important;
+            }
+           
+        
+        
+            .container{
+                
+                left: -23px !important;
+                
+            }
+
+
+            .company-info p{
+                top: 330px!important;
+                left: 800px;
+                
+                
+            }
+       
+
+            .header{
+                height: 400px !important;
+            }
+        .company-info h2{
+            margin-top: -75px !important;
+        }
+
+
+
+    
+       
+            }
+
+
+
+
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 768px) and (min-height: 1366px) {
+    
+
+    th{
+        font-size: 32px !important;
+    }
+    td{
+        font-size: 36px !important;
+    }
+    .flag{
+        width: 105px !important;
+        height: 90px !important;
+    }
+    .header{
+        height: 350px !important;
+    }
+    .container{
+        margin-top: -40px !important;
+        top: 1350px !important;
+       }
+       .company-info h2{
+        margin-top: -40px !important;
+        font-size:49px !important;
+       }
+    .company-info p {
+        
+        margin-top: 15px !important;
+
+        font-size: 35px !important;
+        left: 600px !important;
+        
+    }   
+    .logo{
+        top: -45px !important;
+        height: 220px !important;
+    }
+
+    .exchange-rate-header{
+        font-size: 40px !important;
+    }
+    #advertisement-bottom{
+        margin-bottom: 10 px !important;
+        height: 250px !important;
+    }
+  #bottom-ad-image{
+    height: 250px !important;
+  }
+}
+
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 768px) and (min-height: 1360px) {
+    
+
+    th{
+        font-size: 36px !important;
+    }
+    td{
+        font-size: 36px !important;
+    }
+    .flag{
+        width: 120px !important;
+        height: 95px !important;
+    }
+    .logo{
+        width: 550px !important;
+    }
+    .company-info p{
+        /* top: 11.5% !important;
+        left: 600px !important; */
+    }
+    .exchange-rate-header{
+        font-size: 50px !important;
+    }
+
+    .container{
+        margin-top: -30px !important;
+    }
+  
+
+}
+
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 664px) and (min-height: 1176px) {
+    
+
+    .th, td{
+        font-size: 33px !important;
+    }
+    .flag{
+        width: 85px !important;
+        height: 85px !important;
+    }
+    .container{
+        margin-top: 650px !important;
+       }
+       .company-info h2{
+        font-size:48px !important;
+       }
+       .header img{
+        margin-top: -40px !important;
+       }
+
+
+       .logo{
+        width: 400px !important;
+        height: 500px !important;
+       }
+   
+} 
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 720px) {
+.company-info h2{
+    font-size: 20px !important;
+    letter-spacing: 5px;
+  
+}
+.company-info p{
+    font-size: 20px !important;
+    letter-spacing: 3px;
+}
+.company-info{
+    margin-top: 690px !important;
+   
+}
+
+
+}
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1176px) and (min-height: 664px) {
+    .container {
+        /* width: 100vw !important;  Full width */
+        height: 100vh !important; /* Full height */
+        max-width: 100% !important;
+        max-height: 100% !important;
+        padding: 30px !important;
+        margin: 0 !important;
+        border-radius: 0 !important; /* Remove rounded corners */
+        overflow: hidden !important; /* Prevent unwanted scrolling */
+        margin-top: -50px !important;
+        /* zoom: -10 !important; */
+    }
+    td{
+        font-size: 20px !important;
+    }
+    th{
+        font-size: 15px;
+    }
+    .exchange-rate-header{
+        font-size: 18px !important;
+        height: 6px !important;
+    }
+    .exchange-rate-table{
+        height: 520px;
+    }
+    .flag{
+        width: 50px !important;
+        height: 43px !important;
+    }
+    .company-info{
+        margin-left: 300px !important;
+        margin-top: 620px;
+    }
+ 
+    .company-info h2{
+        font-size: 20px !important;
+        letter-spacing: 8px !important;
+        zoom: 1.0;
+        margin-left: -380px !important;
+        margin-right: -300px !important;
+    }
+    .company-info p{
+        font-size: 20px !important;
+        margin-left: -100px !important;
+    }
+    .logo{
+        width: 280px !important;
+        height: 100px !important;
+    }
+    .header{
+        height: 100px;
+    }
+    .advertisement-right{
+       height: 730px !important;
+       width: 300px !important;
+       top: -210px;
+    }
+    .advertisement-right img{
+        display: block;
+        height: 700px !important;
+        margin-top: -10px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1400px) and (min-height: 1050px) {
+    .container {
+        /* width: 100vw !important;  Full width */
+        height: 100vh !important; /* Full height */
+        max-width: 100% !important;
+        max-height: 100% !important;
+        padding: 30px !important;
+        margin: 0 !important;
+        border-radius: 0 !important; /* Remove rounded corners */
+        overflow: hidden !important; /* Prevent unwanted scrolling */
+        margin-top: -10px !important;
+        /* zoom: -10 !important; */
+    }
+    td{
+        font-size:  27px !important;
+    }
+    th{
+        font-size: 20px;
+    }
+    .exchange-rate-header{
+        font-size: 22px !important;
+        height: 6px !important;
+    }
+    .exchange-rate-table{
+        height: 1020px;
+    }
+    .flag{
+        width: 100px !important;
+        height: 83px !important;
+    }
+  
+ 
+    .company-info {
+        display: flex;
+        flex-direction: column; /* Stack h2 on top of p */
+        align-items: center;    /* Center them horizontally */
+        text-align: center;     /* Center the text */
+        
+        top: -500px !important;
+        left: 350px !important;
+        margin-top: 100px !important; /* Reduce this value to move it up */
+        position: relative; /* Allow absolute positioning inside */
+    }
+    
+    .company-info h2 {
+        font-size: 10px !important; 
+        letter-spacing: 0px !important;
+        margin: 10 !important; /* Remove unnecessary margins */
+        margin-top: 90px !important; /* Reduce top margin */
+        zoom: 0.5;
+    }
+    
+    .company-info p {
+        font-size: 12px !important; 
+        margin: 35px 0 10px 0 !important; /* Small margin between h2 and p */
+        position: absolute;
+        left: 10%; /* Move it to the left */
+        top: 80%; /* Center it vertically */
+        transform: translateY(-50%); /* Adjust for perfect centering */
+        text-align: left; /* Align text to the left */
+    }
+    
+    .logo{
+        width: 280px !important;
+        height: 100px !important;
+    }
+    .header{
+        height: 100px;
+    }
+    .advertisement-right{
+       height: 1100px !important;
+       width: 380px !important;
+      right: -70px !important;
+      top: 140px !important;
+    }
+    .advertisement-right img{
+        display: block !important;
+        height: 1000px !important;
+        margin-top: 25px !important;
+        right: 46px !important;
+        max-width: 80% !important;
+       
+    }
+}
+
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 1050px) and (min-height: 1400px) {
+
+.flag{
+    height: 107px !important;
+}
+th{
+font-size: 40px !important;
+}
+td{
+font-size: 50px !important;
+}
+
+}
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1366px) and (min-height: 768px) {
+    
+
+.th, td{
+    font-size: 26px !important;
+}
+.flag{
+    width: 68px !important;
+    height: 62px !important;
+}
+.container{
+    left: -40px !important;
+    margin-top: -40px !important;
+    height: 850px !important;
+}
+
+.logo{
+    height: 100px !important;
+    width: 200px !important;
+}
+.company-info h2{
+    font-size: 20px !important;
+    margin-top: 778px !important;
+}
+.header{
+    height: 80px !important;
+}
+
+.advertisement-right{
+   width: 370px !important;
+   height: 900px !important;
+   margin-top: 400px !important;
+}
+
+.advertisement-right img{
+    height: 850px !important;
+    top: -35px !important;
+}
+
+
+
+.exchange-rate-header{
+    height: 15px !important;
+    font-size: 20px !important;
+}
+th{
+    font-size: 20px !important;
+}
+
+
+.company-info h2{
+    margin-right: -100px !important;
+    padding-left: 0% !important;
+}
+
+.company-info p{
+    font-size: 20px !important;
+    margin-right: -100px !important;
+}
+
+}
+
+
+
+
+/*  */
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1440px) and (min-height: 900px) {
+
+    .advertisement-right{
+        display: block;
+        right: -50px;
+        margin-right: 0px !important;
+        width: 300px !important;
+        max-width: 100% !important;
+        margin-top: 470px !important;
+        height: 1250px !important;
+    }
+    .advertisement-right img{
+        height: 1000px !important;
+        margin-top: 178px;
+        width: 400px !important;
+        margin-right: 42px !important;
+    }
+    .exchange-rate-table{
+        height: 830px !important;
+    }
+    .company-info h2 {
+        font-size: 40px !important;
+        white-space: nowrap;       /* Prevents text from wrapping to the next line */
+        overflow: hidden;          /* Hides overflow text if it exceeds the container */
+        text-overflow: ellipsis;   /* Adds "..." if the text overflows */
+        width: 10%;               /* Ensures it takes the full width of the container */
+        margin-bottom: 10px; /* Adjust the margin to reduce the gap */
+    }
+    
+    .company-info p{
+        margin-top: 0; /* Removes any extra space at the top of the p element */
+        font-size: 14px; /* Adjust the font size as needed */
+        
+     }
+
+     .company-info{
+        margin-top: 850px !important;
+        margin-left: -80px !important;
+     }
+     .flag{
+        height: 69px ;
+        width: 90px;
+     }
+     th{
+        font-size: 20px;
+     }
+     td{
+        font-size: 26px;
+     }
+    }
+
+
+
+
+
+    @media screen and (orientation: portrait) and (max-width: 900px) and (min-height: 1440px) {
+.flag{
+    height: 114px !important;
+
+}
+
+td{
+    font-size: 49px !important;
+}
+
+    }
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1600px) and (min-height: 900px) {
+    td{
+        font-size: 30px !important;
+    }
+    th{
+        font-size: 20px !important;
+    }
+    .flag{
+        width: 90px !important;
+        height: 65px !important;
+    }
+    .company-info h2{
+        font-size: 30px !important;
+        padding-left: 0px !important;
+        letter-spacing: 15px !important;
+        white-space: nowrap;       /* Prevents text from wrapping to the next line */
+        overflow: hidden;          /* Hides overflow text if it exceeds the container */
+        text-overflow: ellipsis;   /* Adds "..." if the text overflows */
+        width: 100%;
+        margin-right: 300px !important;
+    }
+    .company-info{
+        margin-right: 650px !important;
+        margin-top: 850px !important;
+    }
+    .company-info p{
+        font-size: 25px !important;
+        margin-right: 40px !important;
+        
+     }
+
+
+
+  
+
+    .container{
+        margin-top: -30px !important;
+        margin-left: 20px !important;
+        height: 950px !important;
+    }
+
+    .exchange-rate-table{
+        height: 50px !important;
+    }
+.advertisement-right{
+    width: 440px !important;
+    height: 980px !important;
+    margin-top: 480px;
+}
+.advertisement-right img{
+    height: 950px !important;
+    margin-top: 7px !important; 
+}
+
+}
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 900px) and (min-height: 1600px) {
+.flag{
+    height: 128px !important;
+    width: 150px !important;
+}
+td{
+    font-size:48px !important
+}
+th{
+    font-size:36px !important
+}
+.company-info p {
+    left: 430px !important;
+}
+
+}
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1600px) and (min-height: 1024px) {
+.container{
+    margin-top: -10px !important;
+    height: 1115px !important;
+}
+th{
+
+}
+td{
+   font-size: 31px !important;
+}
+.flag{
+    height: 80px !important;
+    width: 100px !important;
+}
+
+.company-info h2{
+    font-size: 25px !important;
+}
+.company-info p {
+    font-size: 23px !important;
+}
+.advertisement-right{
+   height: 1155px !important;
+   margin-top: 540px;
+   
+}
+
+.company-info
+{
+    margin-top: 970px !important;
+    margin-left: 100px;
+}
+
+.advertisement-right img{
+    display: block;
+    height: 1105px !important;
+}
+
+
+
+
+}
+
+
+@media screen and (orientation: portrait) and (max-width: 1024px) and (min-height: 1600px) {
+.logo{
+    width: 600px !important;
+    height: 500px !important;
+}
+.flag{
+    height: 130px !important;
+    width: 160px !important;
+}
+}
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1680px) and (min-height: 1050px) {
+
+.container{
+    height: 1150px !important;
+    margin-top: -10px !important;
+    margin-left: 10px !important;
+
+    
+}
+.exchange-rate-table{
+    height: 950px;
+}
+.company-info {
+    margin-top: 980px !important; /* Reduce to move the whole section up */
+}
+
+.company-info h2 {
+    font-size: 25px !important;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 10px; /* Adjust spacing between letters */
+    word-spacing: 5px;
+    margin-left: -20px;
+    margin-bottom: 10px !important; /* Reduce gap between h2 and p */
+}
+
+.company-info p {
+    font-size: 25px !important;
+    margin-left: -50px;
+    margin-top: -10px !important; /* Remove extra gap above p */
+}
+
+th{
+
+}
+td{
+ font-size: 32px !important;
+}
+.flag{
+    height: 80px !important;
+    width: 120px !important;
+}
+
+
+.advertisement-right{
+    
+    width: 435px !important;
+    height: 1190px !important;
+    margin-top: 550px;
+    margin-right: 20px !important;
+}
+.advertisement-right img{
+  display: block;
+  height: 1000px;
+  margin-top: 20px;
+  margin-right: 30px !important;
+  width: 400px !important;
+}
+
+
+}
+
+
+
+
+
+
+
+
+@media screen and (orientation: portrait) and (max-width: 1050px) and (min-height: 1680px) {
+.container{
+    margin-top: 120px !important;
+}
+
+.logo{
+    width: 800px !important;
+    height: 600px !important;
+}
+.company-info p{
+    margin-left: 350px !important;
+   margin-top: -230px !important;
+   
+}
+.flag{
+    height: 137px !important;
+}
+
+.update-info{
+    margin-bottom: -30px !important;
+}
+
+
+}
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1152px) and (min-height: 864px) {
+.container{
+    margin-left: 20px !important;
+    margin-top: -50px !important;
+    height: 900px !important;
+}
+.exchange-rate-table{
+    height: 790px !important;
+}
+.flag{
+    height: 68px !important;
+    width: 75px !important;
+}
+td{
+    font-size:  21px !important;
+}
+
+
+.advertisement-right{
+    
+    width: 330px !important;
+    margin-top: 680px !important;
+    height: 980px !important;
+}
+
+.advertisement-right img{
+    display: bloack !important;
+    margin-top: 85px !important;
+    height: 900px !important;
+}
+.company-info h2{
+    font-size: 20px !important;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 8px !important;       /* Adjust spacing between letters */
+    word-spacing: 5px;
+    margin-left: 15px !important; 
+}
+
+.company-info{
+    margin-top: 740px !important;
+}
+
+}
+  
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1024px) and (min-height: 768px) {
+.container{
+    margin-top: -35px !important;
+    margin-left: 20px !important;
+}
+.exchange-rate-table{
+    height: 900px !important;
+}
+.flag{
+    width: 70px !important;
+}
+td{
+    font-size: 19px !important;
+}
+.advertisement-right{
+    width: 290px !important;
+    height: 980px !important;
+    margin-top: 600px !important;
+}
+.advertisement-right img{
+    display: block !important;
+    margin-top: 150px !important;
+    height: 820px !important;
+}
+.company-info h2{
+    font-size: 20px !important;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 8px !important;       /* Adjust spacing between letters */
+    word-spacing: 5px;
+    margin-left: -30px !important; 
+}
+.company-info{
+    margin-top: 690px !important;
+    zoom: 0.8;
+
+}
+.company-info p{
+    margin-left: -80px !important;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 800px) and (min-height: 600px) {
+    .container {
+      margin-top: -15px !important;
+      margin-left: -8px !important;
+      max-width: 100% !important;
+      height: 650px !important;
+    }
+    .company-info h2{
+        font-size: 22px !important;
+    }
+    .company-info p{
+        font-size: 18px !important;
+    }
+    .exchange-rate-table {
+      height: 600px !important;
+    }
+    .flag {
+      width: 52px !important;
+      height: 42px !important;
+    }
+    .header{
+        height: 50px !important;
+    }
+    .logo{
+        height: 70px !important;
+    }
+    th{
+        font-size: 16px !important;
+    }
+    td {
+      font-size: 14.3px !important;
+    }
+    .exchange-rate-header{
+        font-size: 18px !important;
+        letter-spacing: 18px !important;
+        height: 10px !important;
+    }
+    .advertisement-right {
+      width: 205px !important;
+      height: 690px !important;
+      margin-top: 320px !important;
+    }
+    .advertisement-right img {
+      display: block !important;
+      margin-top: 6px !important;
+      height: 600px !important;
+      width: 100% !important;
+    }
+    .company-info h2 {
+      font-size: 18px !important;
+      white-space: nowrap;
+      width: 100%;
+      text-align: center;
+      letter-spacing: 3px !important;
+      word-spacing: 4px;
+      margin-left: 30px !important;
+      margin-top: 380px !important;
+    }
+    .company-info p{
+        font-size: 15px !important;
+        letter-spacing: 5px !important;
+        margin-top: -15px !important;
+    }
+    .update-info {
+        position: relative;
+        height: 300px;
+        overflow: visible;
+    }
+    .company-info{
+        margin-top: 550px !important;
+    }
+    
+    .update-info p {
+        position: absolute;
+        bottom: 10px; /* Moves it downwards */
+        z-index: 10;    /* Brings it on top of other elements */
+        width: 100%;    /* Ensures full width if needed */
+        font-size: 12px !important;
+    }
+    
+    
+    
+  }
+  
+
+
+
+
+
+
+
+
+  /* Adding an enhanced fade-in and flip effect with additional animation effects */
+.fade-in {
+    opacity: 0;
+    transform: rotateY(90deg) scale(0.8); /* Start with a smaller and rotated state */
+    animation: flipIn 1s ease-out forwards, fadeIn 1s ease-in forwards;
+}
+
+@keyframes flipIn {
+    0% {
+        transform: rotateY(90deg) scale(0.8); /* Start with rotation and scale */
+        opacity: 0;
+    }
+    30% {
+        transform: rotateY(45deg) scale(1.05); /* Rotate halfway and slightly scale up */
+        opacity: 0.5;
+    }
+    50% {
+        transform: rotateY(0deg) scale(1); /* Flip to normal state and return to original size */
+        opacity: 1;
+    }
+    100% {
+        transform: rotateY(0deg) scale(1); /* Final position and size */
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Adding a bounce effect to the text for a more dynamic look */
+.fade-in span {
+    animation: bounceIn 1s ease-out forwards;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(10px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Optionally, add a subtle shadow to the rows during animation */
+.fade-in {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth hover effect to emphasize interaction */
+.fade-in:hover {
+    transform: scale(1.05) rotateY(5deg);
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+@media screen and (orientation: portrait) and (max-width: 768px) and (min-height: 1024px) {
+    .flag{
+        height: 72px !important;
+        width: 80px !important;
+        
+    }
+    td{
+        font-size: 40px !important;
+    }
+    .logo{
+        width: 400px !important;
+    }
+    .container{
+        margin-left: -30px !important;
+    }
+
+    .update-info{
+        margin-bottom: -25px !important;
+    }
+    }
+
+
+    @media screen and (orientation: portrait) and (max-width: 864px) and (min-height: 1152px) {
+        .flag{
+            height: 89px !important;
+            width: 120px !important;
+        }
+        td{
+            font-size: 40px !important;
+        }
+        
+        .update-info{
+            margin-bottom: -30px !important;
+        }
+        }
+
+
+
+
+
+ */

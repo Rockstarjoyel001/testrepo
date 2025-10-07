@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+
+  <title>Currency Rate Sheet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="OEC Logo  copy.jpg" alt="Logo" width="100" height="100">
+
+        <h1 style="font-family: 'Saira', sans-serif;">ORIENT EXCHANGE CO. (LLC)</h1>
+      </header>
+      
+      <div class="info-bar ">
+        <div id="branchDisplay" style="font-weight: bolder; font-size: x-large; font-family: 'Saira', sans-serif;">Loading...</div>
+    
+        <div class="crs" style="text-align: center; font-weight: bolder; font-size: x-large; letter-spacing: 5PX; font-family: 'Saira', sans-serif;">💱 CURRENCY RATE SHEET 💱</div> <!-- Centered Currency Rate Sheet -->
+    
+        <div style="font-weight: bolder; font-size: larger; text-transform: uppercase; font-family: 'Saira', sans-serif;">AS ON: <span id="datetime" style="font-weight: bolder;"></span></div>
+    </div>
+    
+
+  <div class="main-container">
+    <div class="rate-table">
+      <table id="currencyRateTable">
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Buy Rate</th>
+            <th>Sell Rate</th>
+            <th>TT Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Currency data will be injected dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Advertisement Section on the Right -->
+    <div class="ad-section">
+      <div class="ad-content">
+          <!-- Advertisement content inside a picture frame -->
+          <p>Contact us today for the best exchange rates!</p>
+          <div class="picture-frame">
+              <img src="ad-banner.png" alt="Advertisement" />
+          </div>
+      </div>
+  </div>
+  
+  </div>
+
+  <div class="ticker" style="font-family: 'Saira', sans-serif;">
+    <marquee behavior="scroll" direction="left" scrollamount="6" id="currencyTicker">
+      <span id="marqueeText">Hi welcome To Orient Exchange Co. (LLC)..!!!</span>
+    </marquee>
+  </div>
+  
+
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,984 @@
+/* General reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+  
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #e3f2fd,#e3f2fd);
+    color: #333;
+    overflow-y: scroll
+}
+body::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+header {
+  
+    background: linear-gradient(to right, #4a66c9, #3e5abb);
+    color: white;
+    padding: 20px 30px;
+    position: relative;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+header img {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 110px;
+    width: auto;
+    border-radius: 8px;
+}
+
+header h1 {
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+#country-rates-body {
+    overflow: hidden;
+  }
+  
+  #country-rates-body tr {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+
+
+@media (max-width: 1024px) {
+    header img {
+        width: 150px;
+        height: 75px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header img {
+        width: 120px;
+        height: 60px;
+    }
+
+    header h1 {
+        font-size: 1.2rem;
+    }
+}
+
+
+  
+.info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    /* color: linear-gradient(to right, #4a66c9, #3e5abb);; */
+    padding: 12px 20px;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    margin: 3px 0;
+    font-family: 'Segoe UI', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* Optional hover effect */
+.info-bar div:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+/* Optional: Responsive layout for small screens */
+@media (max-width: 600px) {
+    .info-bar {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+}
+
+  
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 90%;
+    margin: 0 auto;
+    transition: transform 0.5s ease-in-out; /* Smooth transition for shifting the table */
+}
+  
+.rate-table {
+    width: 100%;  /* Full width by default */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out; /* Smooth transition for table width change */
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+th, td {
+    /* padding: 5px 34px; */
+    padding: 12px;
+    text-align: center;
+    font-weight: bolder;
+    border: 1px solid #ddd;
+    font-size: 30px;
+    
+}
+  
+/* th {
+    background: linear-gradient(to right, #5576d1,#5576d1);
+    color: white;
+    font-size: 20px;
+} */
+ 
+
+th {
+    background: linear-gradient(to right, #4a66c9, #3e5abb);
+    /* background: linear-gradient(to right, #5576d1,#5576d1); */
+    color: white;
+    font-size: 18px;
+    padding: 8px 16px;
+    text-align: center;
+    border: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+    border-radius: 6px 6px 0 0;
+}
+
+
+
+tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+  
+/* Advertisement Section *//* Advertisement Section */
+.ad-section {
+    width: 25%;
+    padding: 10px;
+    background: linear-gradient(to right, #e3f2fd,#e3f2fd);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Helps ensure inner content can use 100% height */
+}
+
+/* Advertisement Content */
+.ad-content {
+    width: 100%;
+    height: 100%; /* Match .ad-section height */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+
+  
+  .ad-content img,
+  .ad-content video {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+  
+  
+.ticker {
+    margin-top: 20px; /* Optional, can remove if not needed */
+    background: linear-gradient(to right, #34509c,#3c5599);
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999; /* Ensures it stays on top of other elements */
+}
+
+
+  
+  /* Adjust currency name display to ensure both English and Arabic appear on the same line */
+  .currency-info {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: 60px;
+    font-size: clamp(14px, 1.5vw, 50px);
+    direction: ltr; /* Keeps LTR order */
+  }
+  
+  .country-name {
+    font-weight: 600;
+  }
+  
+  .flag-img {
+    width: 80px;
+    height: 90px;
+    object-fit: cover;
+  }
+  
+  /* Fade-in animation */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Apply the fade-in animation to table rows */
+  .row-animation {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+
+  
+  @media screen and (orientation: landscape) and (max-width: 1680px) and (min-height: 1050px) {
+    .flag-img{
+        height: 53px !important;
+    }
+}
+
+
+
+  
+  @media screen and (orientation: landscape) and (max-width: 1768px) and (min-height: 992px) {
+    .flag-img{
+        height: 45px;
+    }
+    .ticker {
+        margin-top: 20px; /* Optional, can remove if not needed */
+        background-color: #003d33;
+        color: white;
+        font-size: 25px;
+        padding: 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999; /* Ensures it stays on top of other elements */
+    }
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 200px;
+        height: 100px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 2rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+  }
+
+
+
+
+
+
+
+
+
+  @media screen and (orientation: landscape) and (max-width: 1600px) and (min-height: 900px) {
+    .flag-img{
+        height: 40px !important;
+        width: 65px;
+    }
+    
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 200px;
+        height: 100px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 2rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+}
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1400px) and (min-height: 1050px) {
+    .flag-img{
+        height: 50px !important;
+        width: 75px;
+    }
+    th{
+        font-size:larger;
+    }
+    header img {
+        width: 200px;
+        height: 100px;
+        transition: all 0.3s ease;
+    }
+}
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1440px) and (min-height: 900px) {
+ 
+    header img {
+        width: 200px;
+        height: 100px;
+        transition: all 0.3s ease;
+    }
+}
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 960px) {
+  header img{
+    width: 200px !important;
+        height: 100px !important;
+  }
+  header h1{
+    font-size: 2.2rem !important;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 768px) {
+    header img{
+      width: 200px !important;
+          height: 100px !important;
+    }
+    header h1{
+      font-size: 2.2rem !important;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 720px) {
+    header img{
+      width: 200px !important;
+          height: 75px !important;
+    }
+    header h1{
+      font-size: 2.2rem !important;
+    }
+
+    header
+    {
+        height: 75px !important;
+    }
+   th{
+    font-size: smaller !important;
+   }
+  }
+
+  @media screen and (orientation: landscape) and (max-width: 1176px) and (min-height: 664px) {
+    header img{
+      width: 200px !important;
+          height: 70px !important;
+    }
+    header h1{
+      font-size: 2.2rem !important;
+    }
+
+    header
+    {
+        height: 75px !important;
+    }
+    /* th{
+        font-size: 15px !important;
+    } */
+  }
+
+  @media screen and (orientation: landscape) and (max-width: 1152px) and (min-height: 864px) {
+    header img{
+      width: 200px !important;
+          height: 60px !important;
+    }
+    header h1{
+      font-size: 2.2rem !important;
+    }
+
+    header
+    {
+        height: 75px !important;
+    }
+  }
+  
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 800px) {
+    header img{
+      width: 200px !important;
+          height: 100px !important;
+    }
+    header h1{
+      font-size: 2.2rem !important;
+    }
+  }
+
+@media screen and (orientation: landscape) and (max-width: 1366px) and (min-height: 768px) {
+    .flag-img{
+        height: 60px !important;
+        width: 80px;
+    }
+    
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        height: 100px !important;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 200px;
+        height: 90px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 2.2rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+    th{
+        font-size: 20px;
+    }
+    td{
+        font-size: 25px !important;
+    }
+    .ticker {
+        margin-top: 20px; /* Optional, can remove if not needed */
+        background-color: #003d33;
+        color: white;
+        font-size: 20px;
+        padding: 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999; /* Ensures it stays on top of other elements */
+    }
+}
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 1024px) {
+    .flag-img{
+        height: 53px !important;
+        width: 75px;
+    }
+    
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 150px;
+        height: 50px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+    th{
+        font-size: 20px;
+    }
+    td{
+        font-size: 25px !important;
+    }
+    .ticker {
+        margin-top: 20px; /* Optional, can remove if not needed */
+        background-color: #003d33;
+        color: white;
+        font-size: 20px;
+        padding: 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999; /* Ensures it stays on top of other elements */
+    }
+    .currency-info {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 60px;
+        font-size: clamp(14px, 1.5vw, 50px);
+        direction: ltr; /* Keeps LTR order */
+      }
+      
+      .country-name {
+        font-weight: 900;
+      }
+}
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 960px) {
+    .flag-img{
+        height: 48px !important;
+        width: 55px;
+    }
+    
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 150px;
+        height: 80px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+    th{
+        font-size: 20px;
+    }
+    td{
+        font-size: 25px !important;
+    }
+    .ticker {
+        margin-top: 20px; /* Optional, can remove if not needed */
+        background-color: #003d33;
+        color: white;
+        font-size: 20px;
+        padding: 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999; /* Ensures it stays on top of other elements */
+    }
+    .currency-info {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 60px;
+        font-size: clamp(14px, 1.5vw, 50px);
+        direction: ltr; /* Keeps LTR order */
+      }
+      
+      .country-name {
+        font-weight: 900;
+      }
+}
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 720px) {
+    .flag-img{
+        height: 48px !important;
+        width: 55px;
+    }
+    
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 150px;
+        height: 60px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+    th{
+        font-size: 20px;
+    }
+    td{
+        font-size: 25px !important;
+    }
+    .ticker {
+        margin-top: 20px; /* Optional, can remove if not needed */
+        background-color: #003d33;
+        color: white;
+        font-size: 20px;
+        padding: 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999; /* Ensures it stays on top of other elements */
+    }
+    .currency-info {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 60px;
+        font-size: clamp(14px, 1.5vw, 50px);
+        direction: ltr; /* Keeps LTR order */
+      }
+      
+      .country-name {
+        font-weight: 900;
+      }
+}
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1176px) and (min-height: 664px) {
+    .flag-img{
+        height: 49px !important;
+        width: 60px;
+    }
+    
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 150px;
+        height: 60px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+    th{
+        font-size: 13px !important;
+        font-weight: bolder !important;
+    }
+    td{
+        font-size: 20px !important;
+        font-weight: bold;
+    }
+    .ticker {
+        margin-top: 20px; /* Optional, can remove if not needed */
+        background-color: #003d33;
+        color: white;
+        font-size: 20px;
+        padding: 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999; /* Ensures it stays on top of other elements */
+    }
+    .currency-info {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 60px;
+        font-size: clamp(14px, 1.5vw, 50px);
+        direction: ltr; /* Keeps LTR order */
+      }
+      
+      .country-name {
+        font-weight: 900;
+      }
+      .info-bar{
+        font-size: 12px !important;
+        font-weight: bolder !important;
+      }
+      .crs{
+        font-size: 15px !important;
+        font-weight: bolder !important;
+      }
+      #branchDisplay{
+        font-size: 15px !important;
+        font-weight: bolder !important;
+      }
+}
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1024px) and (min-height: 768px) {
+    .flag-img{
+        height: 48px !important;
+        width: 55px;
+    }
+    
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 150px;
+        height: 60px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+    th{
+        font-size: 20px;
+    }
+    td{
+        font-size: 15px !important;
+    }
+    .info-bar{
+        height: 50px;
+        font-size: 10px !important;
+        
+    }
+    .ticker {
+        margin-top: 20px; /* Optional, can remove if not needed */
+        background-color: #003d33;
+        color: white;
+        font-size: 20px;
+        padding: 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999; /* Ensures it stays on top of other elements */
+    }
+    .currency-info {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 60px;
+        font-size: clamp(14px, 1.5vw, 50px);
+        direction: ltr; /* Keeps LTR order */
+      }
+      
+      .country-name {
+        font-weight: 900;
+      }
+      #branchDisplay{
+        font-size: 13px !important;
+      }
+
+      .crs{
+        font-size: 13px !important;
+      }
+}
+
+
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 800px) and (min-height: 600px) {
+    .flag-img{
+        height: 28px !important;
+        width: 35px;
+    }
+    
+    header {
+        background-color: #003d33;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        height: 65px !important;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+    }
+    
+    header img {
+        width: 150px;
+        height: 60px;
+        transition: all 0.3s ease;
+    }
+    
+    header h1 {
+        margin-left: auto;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        letter-spacing: 5px;
+    }
+    th{
+        font-size: 10px;
+        font-weight: bolder !important;
+    }
+    td{
+        font-size: 13px !important;
+        padding: 5px !important;
+    }
+    .ticker {
+        margin-top: 20px; /* Optional, can remove if not needed */
+        background-color: #003d33;
+        color: white;
+        font-size: 20px;
+        padding: 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999; /* Ensures it stays on top of other elements */
+    }
+    .currency-info {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 60px;
+        font-size: clamp(14px, 0.5vw, 50px);
+        direction: ltr; /* Keeps LTR order */
+      }
+      
+      .country-name {
+        font-weight: 900;
+        font-size: small;
+      }
+      .info-bar{
+        font-size: 7px;
+      }
+      .crs{
+        font-size: 10px !important;
+      }
+      #branchDisplay{
+        font-size: 10px !important;
+      }
+
+     
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#currencyTicker1, #currencyTicker2 {
+    transition: opacity 1s ease-in-out;
+  }
+  #currencyTicker2 {
+    opacity: 0;
+  }
+  

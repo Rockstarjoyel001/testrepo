@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+  <title>Rate Logs</title>
+  <style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #caf4ff, #c7e0fa);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 20px 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  padding: 15px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.filter-container:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.filter-container label {
+  margin-right: 10px;
+  font-size: 1rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.filter-container select,
+.filter-container input,
+.filter-container button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.filter-container select,
+.filter-container input {
+  background-color: #f8f9fa;
+}
+
+.filter-container button {
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.filter-container button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.table-container {
+  width: 85%;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow-x: auto;
+  transition: all 0.3s ease;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+td {
+  background-color: #ffffff;
+}
+
+td:hover {
+  background-color: #f1f1f1;
+  transition: all 0.3s ease;
+}
+
+.back-button {
+  display: block;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+  }
+
+  .filter-container label,
+  .filter-container select,
+  .filter-container input,
+  .filter-container button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .table-container {
+    width: 95%;
+    margin: 15px;
+    padding: 15px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h1 style="font-family: 'Saira', sans-serif;">Branch Rate Logs</h1>
+
+  <!-- Button to go back -->
+  <!-- <button class="back-button" onclick="window.location.href='/New folder/index.html'">Back to Main Page</button> -->
+
+  <!-- Filter Options -->
+  <div class="filter-container" style="font-family: 'Saira', sans-serif;">
+    <label for="dateFilter" style="font-family: 'Saira', sans-serif;">Date:</label>
+    <input type="date" id="dateFilter" style="font-family: 'Saira', sans-serif;">
+    
+    <label for="branchFilter" style="font-family: 'Saira', sans-serif;">Branch:</label>
+    <select id="branchFilter" style="font-family: 'Saira', sans-serif;">
+      <option value="" style="font-family: 'Saira', sans-serif;">All Branches</option>
+      <!-- Branch options will be populated here -->
+    </select>
+
+    <button onclick="applyFilters()" style="font-family: 'Saira', sans-serif;">Apply Filters</button>
+
+
+
+    <button onclick="exportToCSV()" style="font-family: 'Saira', sans-serif;">Export as CSV</button>
+
+    <script>
+      function exportToCSV() {
+    if (filteredData.length === 0) {
+        alert("No data available to export.");
+        return;
+    }
+
+    const headers = Object.keys(filteredData[0]);
+    let csvContent = "data:text/csv;charset=utf-8," + headers.join(",") + "\n";
+
+    filteredData.forEach(row => {
+        const rowData = headers.map(key => {
+            let value = row[key];
+
+            if (key === "NewBuyRate" || key === "NewSellRate" || key === "NewTTRemittanceRate") {
+                const oldKey = `Old${key.slice(3)}`;
+                const oldValue = row[oldKey];
+                if (value === oldValue) {
+                    value = "No Change";
+                }
+            }
+
+            // Format numbers to 2 decimal places
+            if (typeof value === 'number' && !isNaN(value)) {
+                value = value.toFixed(2);
+            }
+
+            // Wrap values in quotes to handle commas
+            return `"${value}"`;
+        });
+
+        csvContent += rowData.join(",") + "\n";
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "filtered_data.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+    </script>
+    
+    <!-- <button onclick="exportToWord()" style="font-family: 'Saira', sans-serif;">Export to Word</button> -->
+  </div>
+
+  <div id="errorMessage" class="error-message" style="display: none; font-family: 'Saira', sans-serif;"></div> <!-- Error message container -->
+  
+  <div class="table-container">
+    <div id="rateAlertsLog" style="font-family: 'Saira', sans-serif;"></div> <!-- Where data will be injected -->
+  </div>
+
+  <!-- Libraries for PDF and Word Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> <!-- FileSaver for Word export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.10.0/docxtemplater.min.js"></script> <!-- Docxtemplater for Word export -->
+
+  <script>
+let originalData = [];
+let filteredData = []; // Declare globally to store filtered data
+let branchList = [];
+
+function fetchData() {
+    fetch('http://localhost:5000/getRateAlertsLog')
+        .then(response => response.json())
+        .then(data => {
+            const updatedData = data.map(({ CurrecnyName, CreatedAt, ...rest }) => ({
+                ...rest,
+                CurrencyName: CurrecnyName,
+                "Created On": CreatedAt // Rename CreatedAt to Created On
+            }));
+
+            originalData = updatedData;
+            branchList = [...new Set(updatedData.map(item => item.BranchName))];
+            populateBranchDropdown(branchList);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+function populateBranchDropdown(branches) {
+    const branchFilter = document.getElementById('branchFilter');
+    branchFilter.innerHTML = '<option value="">Select Branch</option>'; // Reset dropdown
+    branches.forEach(branch => {
+        const option = document.createElement('option');
+        option.value = branch;
+        option.textContent = branch;
+        branchFilter.appendChild(option);
+    });
+}
+
+function displayData(data) {
+    const logDiv = document.getElementById('rateAlertsLog');
+
+    if (data.length === 0) {
+        logDiv.innerHTML = '';
+        return;
+    }
+
+    let htmlContent = '<table><tr>';
+
+    // Create headers for table dynamically
+    Object.keys(data[0]).forEach(key => {
+        htmlContent += `<th>${key}</th>`;
+    });
+    htmlContent += '</tr>';
+
+    data.forEach(row => {
+        htmlContent += '<tr>';
+
+        Object.keys(row).forEach(key => {
+            let value = row[key];
+            if (key === "NewBuyRate" || key === "NewSellRate" || key === "NewTTRemittanceRate") {
+                const oldValue = row[`Old${key.slice(3)}`];  // Slice to remove 'New' prefix
+                if (value === oldValue) {
+                    value = "No Change";  // Mark as "No Change" if values are the same
+                }
+            }
+
+            const formattedValue = (typeof value === 'number' && !isNaN(value)) ? value.toFixed(2) : value;
+            htmlContent += `<td>${formattedValue}</td>`;
+        });
+
+        htmlContent += '</tr>';
+    });
+
+    htmlContent += '</table>';
+    logDiv.innerHTML = htmlContent;
+    document.getElementById('errorMessage').style.display = 'none';
+}
+
+function applyFilters() {
+  const dateFilter = document.getElementById('dateFilter').value;
+
+  const branchFilterEl = document.getElementById('branchFilter');
+  const branchFilter = branchFilterEl && branchFilterEl.value ? branchFilterEl.value.trim().toUpperCase() : "";
+
+  filteredData = originalData.filter(item => {
+    const itemDate = new Date(item["Created On"]).toISOString().split('T')[0];
+    const itemBranch = (item.BranchName || "").trim().toUpperCase(); // ✅ Fixed here
+
+    const dateMatches = !dateFilter || itemDate === dateFilter;
+    const branchMatches = !branchFilter || itemBranch === branchFilter;
+
+    return dateMatches && branchMatches;
+  });
+
+  if (filteredData.length === 0) {
+    document.getElementById('errorMessage').textContent = 'No data found for the selected filters.';
+    document.getElementById('errorMessage').style.display = 'block';
+    document.getElementById('rateAlertsLog').innerHTML = '';
+  } else {
+    displayData(filteredData);
+  }
+}
+
+
+// Ensure data is only shown after clicking the filter button
+window.onload = fetchData;
+
+</script>
+
+</body>
+</html>

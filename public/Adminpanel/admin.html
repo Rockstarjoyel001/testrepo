@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+    <div class="logo" style="position: absolute; top: 20px; left: 20px; width: 180px; height: 80px;">
+        <img src="OEC Logo .jpg" alt="" style="width: 200px; height: 80px;">
+      </div>
+
+
+
+
+      <!-- Hidden Checkbox to Control Menu -->
+  <input type="checkbox" id="burger-toggle" style="display: none;">
+  <!-- Burger Icon -->
+  <label for="burger-toggle" class="burger-container" style="position: fixed; top: 20px; right: 20px; z-index: 1000; cursor: pointer; width: 40px; height: 30px; display: flex; flex-direction: column; justify-content: space-between; padding: 5px; border-radius: 5px; background: hwb(0 100% 0% / 0.1); backdrop-filter: blur(10px); box-shadow: 0 4px 6px #0000001a;">
+    <div class="burger-line" style="width: 100%; height: 3px; background-color: rgb(46, 46, 46); border-radius: 2px; transition: all 0.4s ease-in-out; font-family: 'Saira', sans-serif;"></div>
+    <div class="burger-line" style="width: 100%; height: 3px; background-color: rgb(46, 46, 46); border-radius: 2px; transition: all 0.4s ease-in-out; font-family: 'Saira', sans-serif;"></div>
+    <div class="burger-line" style="width: 100%; height: 3px; background-color: rgb(46, 46, 46); border-radius: 2px; transition: all 0.4s ease-in-out; font-family: 'Saira', sans-serif;"></div>
+  </label>
+  <!-- Navigation Menu -->
+  <nav class="nav-menu" style="position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: linear-gradient(135deg, #3a3a3a 0%, #273849 100%); transition: right 0.4s cubic-bezier(0.77, 0.2, 0.05, 1); box-shadow: -4px 0 15px #00000033; overflow-y: auto; padding-top: 100px;">
+    <ul style="list-style-type: none; padding-left: 0;">
+
+
+
+        <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;">
+            <p id="" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+                <img src="OEC Logo .jpg" alt="" srcset="" width="200px" height="50px " style="margin-left: 25px;" >
+            </p>
+        </li>
+
+        
+
+      <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a; display: none;">
+        <p href=""  id="openModal"   style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif; ">Advertisments</p>
+      </li>
+
+
+
+      <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;">
+        <p id="ads-openModalBtn" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+            ADVERTISEMENTS
+        </p>
+    </li>
+
+       <!-- Ads Modal -->
+    <div id="ads-modal" class="ads-modal">
+        <div class="ads-modal-content">
+            <span class="ads-close">&times;</span>
+            <h2 style="font-family: 'Saira', sans-serif; font-weight: bolder;">Branch Advertisement's</h2>
+            <select id="ads-branchDropdown" style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+                <option value="">Loading...</option>
+            </select>
+
+            <!-- Two-column layout -->
+            <div class="ads-columns">
+                <!-- Left column: Landscape Mode -->
+                <div class="ads-left-column">
+                    <h3 style="font-family: 'Saira', sans-serif; font-weight: bolder;" >Ads in Landscape Mode <sub> (Dimensions required - 648x1152 || 648xx992)</sub> </h3>  
+                    <!-- <input type="file" id="ads-landscapeUpload" accept="image/*" >  -->
+                    <input type="file" id="ads-landscapeUpload" accept=".png,.jpg,.gif,.mp4">
+
+                    <div id="landscapePreview"></div>
+                </div>
+
+                <!-- Right column: Portrait Mode -->
+                <div class="ads-right-column">
+                    <h3 style="font-family: 'Saira', sans-serif; font-weight: bolder;">Ads in Portrait Mode  <sub> (Dimensions required - 1400x200 )</sub></h3> 
+                    <input type="file" id="ads-portraitUpload" accept=".png,.jpg,.gif,.mp4">
+                     
+                 
+                    <div id="portraitPreview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+          <!-- List item that triggers the modal -->
+<li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;">
+    <p id="Settings" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+        TIMER SETTINGS
+    </p>
+</li>
+
+
+
+
+<!-- Modal structure with Settings class names -->
+<div id="settingsModal" class="settings-modal">
+    <div class="settings-modal-content">
+        <span class="settings-modal-close" id="modalClose">❌</span>
+        <div class="settings-modal-header" style="font-family: 'Saira', sans-serif; font-weight: bolder;">Settings</div>
+        <div class="settings-modal-body">
+            <ul>
+                <!-- Ads Transition Speed -->
+                <li>
+                    <label for="transitionSpeed" style="font-family: 'Saira', sans-serif; font-weight: bolder;">Ads Transition Speed (seconds):</label>
+                    <input type="text" id="transitionSpeed" value="5" style="font-family: 'Saira', sans-serif;">
+                </li>
+
+                <!-- Ads Hide Duration -->
+                <li>
+                    <label for="hideDuration" style="font-family: 'Saira', sans-serif; font-weight: bolder;">Ads Hide Duration (seconds):</label>
+                    <input type="text" id="hideDuration" value="" style="font-family: 'Saira', sans-serif;">
+                </li>
+
+                <!-- Exchange Rate Flow Speed -->
+                <li>
+                    <label for="flowSpeed" style="font-family: 'Saira', sans-serif; font-weight: bolder;">Rate Transaction speed (seconds):</label>
+                    <input type="text" id="flowSpeed" value="2" style="font-family: 'Saira', sans-serif;">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Use const for the modal element
+    const settingsModal = document.getElementById('settingsModal');
+    const settingsButton = document.getElementById('Settings');
+    const modalClose = document.getElementById('modalClose');
+
+    // Show modal when "Detailed Settings" is clicked
+    settingsButton.addEventListener('click', () => {
+        settingsModal.style.display = 'flex';
+    });
+
+    // Close modal when "Close" button is clicked
+    modalClose.addEventListener('click', () => {
+        settingsModal.style.display = 'none';
+    });
+
+    // Optional: Close modal if clicked outside of the modal content
+    window.addEventListener('click', (e) => {
+        if (e.target === settingsModal) {
+            settingsModal.style.display = 'none';
+        }
+    });
+
+    
+
+    
+</script>
+
+
+
+
+
+
+
+
+
+      <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a; display: none;">
+        <p id="adTransitionButton" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+          AdTransitionSpeed
+        </p>
+      </li>
+      
+     <!-- AdTransitionSpeed Modal -->
+<div id="AdTransitionSpeedModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+    <div style="background: white; padding: 20px; border-radius: 5px; width: 300px; text-align: center; position: relative;">
+      <!-- Close Button -->
+      <span onclick="transitionCloseModal()" style="position: absolute; top: 10px; right: 10px; font-size: 24px; font-weight: bold; cursor: pointer; color: #aaa;">
+        &times;
+      </span>
+      <h2 style="font-family: 'Saira', sans-serif;">Enter Ad Transition Speed (in seconds)</h2>
+      <input type="number" id="transitionSpeedInput" placeholder="Enter seconds" style="padding: 10px; width: 100%; margin-bottom: 10px; font-family: 'Saira', sans-serif;">
+      <button onclick="convertToMilliseconds()" style="padding: 10px 20px; background-color: #00aeff; color: white; border: none; cursor: pointer; font-family: 'Saira', sans-serif;">
+        Submit
+      </button>
+    </div>
+  </div>
+  
+      
+
+
+
+    <!-- List item that triggers the modal -->
+<li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a; display: none;">
+    <p id="adHideDurationBtn" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+        AdHideDuration
+    </p>
+</li>
+
+<!-- Modal structure -->
+<div id="adHideDurationModal" class="adHideDurationModal">
+    <div class="modal-content">
+        <span id="closeAdHideDurationModal" class="close">&times;</span>
+        <h2 style="color: rgb(0, 0, 0); font-family: 'Saira', sans-serif;">Enter Ad Hide Duration</h2>
+        <input type="number" id="adHideDuration" placeholder="Enter duration (in seconds)" style="font-family: 'Saira', sans-serif;"/>
+        <button id="saveAdHideDuration" style="background-color: rgb(42, 127, 255); font-family: 'Saira', sans-serif;">Save Duration</button>
+    </div>
+</div>
+
+      
+
+
+
+      <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a; display: none;">
+        <p href="" onclick="openIntervalModal()" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">ExchangeRateFlowSpeed</p>
+ </li>
+
+ <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;">
+    <p id="marueemodal" 
+        style="color: white; background: none; border: none; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+      NEWS PICKER
+    </p>
+  </li>
+
+  <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;">
+    <p id="RateLogs" style="color: white; background: none; border: none; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;" onclick="window.location.href='./ratelog.html'">
+      BRANCH RATE-LOGS
+    </p>
+  </li>
+
+<!-- Menu Item -->
+
+
+
+
+
+
+
+<li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;">
+  <a id="currencymodal" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+    CURRENCY-LIST
+  </a>
+</li> 
+
+
+
+<!-- Modal -->
+<div id="currencyModal" style="display: none;  top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 500px; box-sizing: border-box;">
+    <h3 style="text-decoration: underline; ">CURRENCY LIST</h3>
+    <ul id="currencyList" style="list-style-type: none; padding: 0; max-height: 300px; overflow-y: auto;">
+      <!-- List of currencies will be populated here -->
+    </ul>
+  
+    <button onclick="hideCurrencyModal()" style="margin-left: 10px; background-color: red; font-weight: bolder; color: white; border-radius: 10px;">CLOSE</button>
+  </div>
+</div>
+
+<div id="popupMessage" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #333;
+  color: white;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  z-index: 1000;
+  text-align: center;
+">
+</div>
+
+
+<script>// Open the modal when the Currency list is clicked
+  document.getElementById("currencymodal").onclick = function() {
+    document.getElementById("currencyModal").style.display = "block";
+    fetchCurrencies();  // Fetch currencies from the API when modal is opened
+  };
+  
+  // Close the modal
+  function hideCurrencyModal() {
+    document.getElementById("currencyModal").style.display = "none";
+  }
+  
+  // Show popup message in the center
+  function showPopup(message) {
+    const popup = document.getElementById("popupMessage");
+    popup.textContent = message;
+    popup.style.display = "block";
+  
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 3000); // 3 seconds
+  }
+  
+  // Fetch currencies from the API and display them in the modal
+  async function fetchCurrencies() {
+    try {
+      console.log("Fetching currencies from the API...");
+      const response = await fetch('http://localhost:5000/api/currencies');
+  
+      if (!response.ok) {
+        console.error("Error fetching currencies:", response.status);
+        return;
+      }
+  
+      const currencies = await response.json();
+      console.log("Currencies fetched:", currencies);
+  
+      if (currencies.length === 0) {
+        console.log("No currencies found.");
+        return;
+      }
+  
+      const currencyList = document.getElementById("currencyList");
+      currencyList.innerHTML = ''; // Clear the list before adding new items
+  
+      currencies.forEach(currency => {
+        const li = document.createElement("li");
+        li.style.display = "flex";
+        li.style.justifyContent = "space-between";
+        li.style.alignItems = "center";
+  
+        const currencyNameSpan = document.createElement("span");
+        currencyNameSpan.textContent = `${currency.CURRENCY_NAME} (${currency.CURRENCY_CODE})`;
+  
+        const toggleButton = document.createElement("button");
+  
+        if (currency.STATUS === '1') {
+          toggleButton.textContent = "Deactivate";
+          toggleButton.style.backgroundColor = "#dc3545";
+        } else {
+          toggleButton.textContent = "Activate";
+          toggleButton.style.backgroundColor = "#28a745";
+        }
+  
+        toggleButton.style.border = "none";
+        toggleButton.style.padding = "8px 16px";
+        toggleButton.style.marginLeft = "10px";
+        toggleButton.style.color = "white";
+        toggleButton.style.cursor = "pointer";
+        toggleButton.style.borderRadius = "4px";
+  
+        toggleButton.onclick = async function () {
+          if (toggleButton.textContent === "Activate") {
+            showPopup(`Activating currency with code: ${currency.CURRENCY_CODE}`);
+            toggleButton.textContent = "Deactivate";
+            toggleButton.style.backgroundColor = "#dc3545";
+            await updateCurrencyStatus(currency.CURRENCY_CODE, 1);
+          } else {
+            showPopup(`Deactivating currency with code: ${currency.CURRENCY_CODE}`);
+            toggleButton.textContent = "Activate";
+            toggleButton.style.backgroundColor = "#28a745";
+            await updateCurrencyStatus(currency.CURRENCY_CODE, 0);
+          }
+        };
+  
+        li.appendChild(currencyNameSpan);
+        li.appendChild(toggleButton);
+  
+        currencyList.appendChild(li);
+      });
+    } catch (error) {
+      console.error("Error fetching currencies:", error);
+    }
+  }
+  
+  // Function to update the currency status in the backend
+  async function updateCurrencyStatus(currencyCode, status) {
+    try {
+      const response = await fetch(`http://localhost:5000/api/currencies/${currencyCode}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status })
+      });
+  
+      if (response.ok) {
+        showPopup(`Currency status updated to ${status === 1 ? 'Active' : 'Inactive'}`);
+      } else {
+        showPopup("Failed to update currency status.");
+      }
+    } catch (error) {
+      showPopup("Error updating currency status.");
+      console.error("Error updating currency status:", error);
+    }
+  }
+  
+  // Placeholder function to simulate deleting a currency
+  function deleteCurrency(currencyCode) {
+    showPopup(`Deleting currency with code: ${currencyCode}`);
+    // You can send a request to the server to delete the currency if needed
+  }
+  
+</script>
+
+
+
+<!-- Modal -->
+<!-- Menu Item -->
+<li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;"> 
+  <a id="openAddNewCurrencyModal" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+    CREATE-NEW-CURRENCY
+  </a>
+</li>
+
+<!-- Modal -->
+<div id="AddNewCurrency" class="addnewcurrency-modal" style="display: none;">
+  <div class="modal-content">
+    <button id="closeAddNewCurrency" style="background: transparent; border: none; color: black; font-size: 24px; float: right; cursor: pointer;">&times;</button>
+    <h2 style="margin-top: 40px; margin-bottom: 20px;">ADD NEW CURRENCY</h2>
+
+    <form id="newCurrencyForm" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+      <input id="currencyName" type="text" placeholder="Currency Name" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; text-transform: uppercase">
+      <input id="currencyCode" type="text" placeholder="Currency Code" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; text-transform: uppercase">
+      <input id="countryCode" type="text" placeholder="Country Code" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; text-transform: uppercase">
+      <input id="currencyNameArabic" type="text" placeholder="Currency Name (Arabic)" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; ">
+      <input id="currencyImage" type="file" accept="image/*" style="flex: 1; padding: 10px;"><sub style="font-weight: bolder;"> (Dimensions required - 64x64)</sub>
+    </form>
+
+    <div style="margin-top: 20px; text-align: right;">
+      <button type="submit" form="newCurrencyForm" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s ease-in-out;
+    z-index: 9999;
+  }
+  .toast.show {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
+
+<!-- Toast container -->
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+
+const newAddCurrency = document.getElementById("AddNewCurrency");
+const openModalBtn = document.getElementById("openAddNewCurrencyModal");
+const closeModalBtn = document.getElementById("closeAddNewCurrency");
+const form = document.getElementById("newCurrencyForm");
+const toast = document.getElementById("toast");
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  // Remove toast after 4 seconds
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 4000);
+}
+
+openModalBtn.onclick = () => {
+  newAddCurrency.style.display = "block";
+};
+
+closeModalBtn.onclick = () => {
+  newAddCurrency.style.display = "none";
+};
+
+window.onclick = (event) => {
+  if (event.target === newAddCurrency) {
+    newAddCurrency.style.display = "none";
+  }
+};
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const currencyName = document.getElementById("currencyName").value.trim();
+  const currencyCode = document.getElementById("currencyCode").value.trim();
+  const countryCode = document.getElementById("countryCode").value.trim();
+  const currencyNameArabic = document.getElementById("currencyNameArabic").value.trim();
+  const currencyImage = document.getElementById("currencyImage").files[0];
+
+  const lettersOnly = /^[A-Za-z]+$/;
+  const noNumbersRegex = /^[^0-9]+$/; // anything but numbers
+  const arabicOnlyRegex = /^[\u0600-\u06FF\s]+$/; // Arabic letters and spaces only
+  const imageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+
+  // Validate Currency Name (no numbers)
+  if (!currencyName || !noNumbersRegex.test(currencyName)) {
+    showToast("Currency Name must not contain numbers.");
+    return;
+  }
+
+  // Validate Currency Name (Arabic) (must be Arabic characters only)
+  if (!currencyNameArabic || !arabicOnlyRegex.test(currencyNameArabic)) {
+    showToast("Currency Name (Arabic) must contain only Arabic characters.");
+    return;
+  }
+
+  if (!lettersOnly.test(currencyCode) || currencyCode.length !== 3) {
+    showToast("Currency Code must be exactly 3 English letters.");
+    return;
+  }
+
+  if (!lettersOnly.test(countryCode) || countryCode.length !== 2) {
+    showToast("Country Code must be exactly 2 English letters.");
+    return;
+  }
+
+  if (!currencyImage || !imageTypes.includes(currencyImage.type)) {
+    showToast("Please upload a valid image file (jpg, jpeg, png, gif).");
+    return;
+  }
+
+  // Check image dimensions
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      if (img.width !== 64 || img.height !== 64) {
+        showToast("Currency image must be exactly 64x64 pixels.");
+        return;
+      }
+
+      const imageBinary = e.target.result; // Base64 with data:image/...
+
+      const payload = {
+        currencyName,
+        currencyCode,
+        countryCode,
+        currencyNameArabic,
+        currencyImage: imageBinary,
+      };
+
+      console.log("Sending payload:", payload);
+
+      fetch("http://localhost:5000/saveCurrency", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload)
+})
+.then(res => res.json())
+.then(data => {
+  if (data.success) {
+    showToast("Currency saved successfully!");
+    newAddCurrency.style.display = "none";
+    form.reset();
+  } else {
+    if (data.error === "Currency already exists") {
+      showToast("Element already exists.");
+    } else {
+      showToast("Error: " + data.error);
+    }
+  }
+})
+.catch(err => {
+  console.error("Fetch error:", err);
+  showToast("Failed to connect to server.");
+});
+
+
+    };
+    img.src = e.target.result;
+  };
+
+  reader.readAsDataURL(currencyImage);
+});
+
+</script>
+
+
+
+
+
+
+</script>
+
+  
+
+  <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;">
+    <p id="createUserTrigger" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+      CREATE USER
+    </p>
+  </li>
+
+  <li style="margin: 0 15px; border-bottom: 1px solid #ffffff1a;">
+    <a id="userManagementLink" href="usermanagement.html" style="color: white; text-decoration: none; display: block; padding: 15px; font-weight: 500; position: relative; cursor: pointer; font-family: 'Saira', sans-serif;">
+      USER-MANAGEMENT
+    </a>
+  </li>
+
+
+
+
+<script>  
+document.addEventListener("DOMContentLoaded", function () {
+  const username = localStorage.getItem("username");
+
+  if (username) {
+    fetch(`http://localhost:5000/getUserProfession?username=${username}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.Profession) {
+          console.log("User Profession:", data.Profession);
+
+          if (data.Profession !== "ADMIN") {
+            const elementsToHide = [
+              "RateLogs",
+              "createUserTrigger",
+              "userManagementLink",
+              "currencymodal",
+              "openAddNewCurrencyModal",
+              "ads",
+              "ads-openModalBtn",
+              "Settings",
+              
+            ];
+
+            elementsToHide.forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.style.display = "none";
+              else console.warn(`Element with ID "${id}" not found.`);
+            });
+
+            // Uncomment below if you plan to use it
+            const marqueeModal = document.getElementById("marueemodal");
+            if (marqueeModal) marqueeModal.style.display = "none";
+          }
+        } else {
+          console.log("User not found");
+        }
+      })
+      .catch(err => {
+        console.error("Error fetching profession:", err);
+      });
+  } else {
+    console.log("Username not found in localStorage");
+  }
+});
+
+
+//RATELOGS / CREATE USER / USER MANAGEMENT / CURRENCY MODAL / ADD NEW CURENCY / ADS ENABLE DISABLE / ORIENTATION / ADS OPEN MODAL / TIME SETTINGS / NEWS PICKER / ALL ARE DIABLED IF USER IS NOT ADMIN
+
+</script>
+
+
+
+
+<div id="createUserModal" class="user-modal"> 
+    <div class="user-modal-content">
+      <span id="createUserClose" class="user-close">&times;</span>
+      <h2 style="font-family: 'Saira', sans-serif; font-weight: bolder;">Add User</h2>
+  
+      <input type="text" id="createUsername" class="input-field" placeholder="Create Username" oninput="this.value = this.value.toUpperCase();" style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+      <input type="password" id="createPassword" class="input-field" placeholder="Create Password" 
+      oninput="validatePassword()" style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+    
+    <!-- Error message for password -->
+    <p id="passwordError" style="color: red; font-size: 12px; display: none;">Password must contain at least one uppercase letter, one lowercase letter, one special character and one digit.</p>
+    
+
+    <select id="createProfession" class="input-field" style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+        <option value="" disabled selected>Select User Type</option>
+        <option value="ADMIN">ADMIN</option>
+        <option value="MANAGER">MANAGER</option>
+        <option value="USER">USER</option>
+      </select>
+  
+
+
+   
+<!-- Real Input (initially hidden) , Branch Name Input-->
+<input type="text" id="createBranchName" class="input-field" 
+placeholder="Enter Branch Name"
+oninput="this.value = this.value.toUpperCase();"
+style="font-family: 'Saira', sans-serif; font-weight: bolder; display: none;" />
+
+<!-- Fake Input Overlay (clickable) -->
+<div id="fakeInput" class="input-field" 
+style="border: 1px solid #ccc; padding: 10px; margin-left: 50px; font-family: 'Saira', sans-serif; font-weight: bolder; cursor: pointer; width: fit-content;">
+Select An Exisiting Branch or Add A New Branch
+</div>
+
+<!-- Confirmation Popup -->
+<div id="confirmBox" style="display: none;
+position: absolute;
+background-color: #fff;
+border: 2px solid #ffffff;
+padding: 20px;
+z-index: 1000;
+top: 100px;
+left: 50%;
+transform: translateX(-50%);
+box-shadow: 0 0 10px rgba(0,0,0,0.3);
+font-family: 'Saira', sans-serif;">
+  <p id="confirmMessage">Do you want to add a new branch?</p>
+  <div id="confirmButtons">
+    <button onclick="proceedNewBranch()" style="background-color: red; width: 50%;">Yes</button>
+    <button onclick="cancelNewBranch()" style="background-color: red; width: 50%;">No</button>
+  </div>
+</div>
+
+
+    
+      <br>
+      <button class="submit-btn" onclick="submitUser()" style="font-family: 'Saira', sans-serif; font-weight: bolder;">Submit</button>
+    </div>
+  </div>
+  
+
+  <script>
+function validatePassword() {
+    const passwordField = document.getElementById("createPassword");
+    const password = passwordField.value;
+    const passwordError = document.getElementById("passwordError");
+
+    // Regex for password validation: at least one uppercase, one lowercase, and one digit
+    // const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+]).+$/;
+
+    if (!regex.test(password)) {
+        passwordError.style.display = "block"; // Show error message
+    } else {
+        passwordError.style.display = "none"; // Hide error message
+    }
+}
+
+function confirmNewBranch() {
+  document.getElementById("confirmBox").style.display = "block";
+}
+
+function proceedNewBranch() {
+  document.getElementById("confirmBox").style.display = "none";
+
+  document.getElementById("fakeInput").style.display = "none"; // Hide dummy
+  const realInput = document.getElementById("createBranchName");
+  realInput.style.display = "inline-block"; // Show real input
+  realInput.disabled = false;
+  realInput.focus();
+}
+
+function cancelNewBranch() {
+  document.getElementById("confirmMessage").textContent = "Please select a branch from the dropdown above.";
+  document.getElementById("confirmButtons").style.display = "none"; // Hide buttons
+
+  setTimeout(() => {
+    document.getElementById("confirmBox").style.display = "none";
+    document.getElementById("confirmMessage").textContent = "Do you want to add a new branch?";
+    document.getElementById("confirmButtons").style.display = "block";
+  }, 2000);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const branchSelect = document.getElementById("branch");
+  const branchInput = document.getElementById("createBranchName");
+
+  // Trigger confirmation on fake input click
+  document.getElementById("fakeInput").addEventListener("click", function () {
+    confirmNewBranch();
+  });
+
+  // Set value from dropdown
+  branchSelect.addEventListener("change", function () {
+    const selectedBranch = branchSelect.value.toUpperCase();
+    branchInput.value = selectedBranch;
+    document.getElementById("fakeInput").textContent = selectedBranch;
+    branchInput.style.display = "none";
+    document.getElementById("fakeInput").style.display = "block";
+  });
+});
+
+  </script>
+  
+
+
+<script>
+
+    
+// Get modal element
+var createUserModal = document.getElementById("createUserModal");
+
+// Get button that opens the modal
+var createUserTrigger = document.getElementById("createUserTrigger");
+
+// Get close button
+var createUserClose = document.getElementById("createUserClose");
+
+// Open modal on click
+createUserTrigger.onclick = function () {
+    createUserModal.style.display = "block";
+};
+
+// Close modal on click
+createUserClose.onclick = function () {
+    createUserModal.style.display = "none";
+};
+
+// Close modal when clicking outside of it
+window.onclick = function (event) {
+    if (event.target === createUserModal) {
+        createUserModal.style.display = "none";
+    }
+};
+
+
+function submitUser() {
+    let usernameField = document.getElementById("createUsername");
+    let passwordField = document.getElementById("createPassword");
+    let branchNameField = document.getElementById("createBranchName");
+    let professionField = document.getElementById("createProfession");
+
+    let username = usernameField.value;
+    let password = passwordField.value;
+    let branchName = branchNameField.value.trim().toUpperCase(); // Ensure uppercase
+    let profession = professionField.value;
+
+    // Check if the password is valid
+    const passwordError = document.getElementById("passwordError");
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+    if (!regex.test(password)) {
+        passwordError.style.display = "block"; // Show error message
+        return; // Prevent form submission
+    }
+
+    // Validate all fields
+    if (!username || !password || !branchName || !profession) {
+        showTemporaryMessage("Please fill all fields.", "red");
+        return;
+    }
+
+    let userData = {
+        username,
+        password,
+        branchName,
+        profession
+    };
+
+    // Send user data to backend
+    fetch("http://localhost:5000/add-user", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)  // Send the data as JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showTemporaryMessage("User submitted successfully!", "green");
+            // Clear input fields
+            usernameField.value = "";
+            passwordField.value = "";
+            branchNameField.value = "";
+            professionField.value = "";
+        } else {
+            showTemporaryMessage("Failed to submit user. " + (data.message || ""), "red");
+        }
+    })
+    .catch(error => {
+        showTemporaryMessage("There was an error submitting the user.", "red");
+    });
+
+    // Close modal after submission
+    createUserModal.style.display = "none";
+}
+
+// Function to show a temporary message
+function showTemporaryMessage(message, bgColor) {
+    const msgDiv = document.createElement("div");
+    msgDiv.textContent = message;
+    msgDiv.style.position = "fixed";
+    msgDiv.style.top = "50%";
+    msgDiv.style.left = "50%";
+    msgDiv.style.transform = "translate(-50%, -50%)";
+    msgDiv.style.backgroundColor = bgColor || "black";
+    msgDiv.style.color = "white";
+    msgDiv.style.padding = "10px 20px";
+    msgDiv.style.borderRadius = "5px";
+    msgDiv.style.fontSize = "16px";
+    msgDiv.style.zIndex = "1000";
+    document.body.appendChild(msgDiv);
+
+    // Remove message after 4 seconds
+    setTimeout(() => {
+        msgDiv.remove();
+    }, 4000);
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <!-- Modal -->
+  <div id="marqueemodal" 
+       style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: transparent; 
+              justify-content: center; align-items: center; z-index: 1000;">
+    <div class="News" style="background-color: #e3f2fd;; padding: 20px; border-radius: 8px; position: relative; width: 80%; max-width: 500px; top: 50px; font-family: 'Saira', sans-serif; margin-top: -10px;">
+      <h2 style="font-weight: bolder;">News</h2>
+      <textarea id="modalContent" style="width: 100%; height: 150px; font-size: 16px; padding: 10px;">Loading...</textarea> <!-- Editable content -->
+      <button id="saveModal" style="background-color: green; color: white; padding: 10px; border: none; cursor: pointer; font-family: 'Saira', sans-serif;">
+        Save
+      </button>
+      <button id="closeModal" style="background-color: red; color: white; padding: 10px; border: none; cursor: pointer; font-family: 'Saira', sans-serif;">
+        Close
+      </button>
+    </div>
+  </div>
+  
+  
+
+<script>
+ // Get the button, modal, and close button
+const modalButton = document.getElementById('marueemodal');
+const marqueeModal = document.getElementById('marqueemodal'); // Renamed this to marqueeModal
+const closeModalButton = document.getElementById('closeModal');
+const saveModalButton = document.getElementById('saveModal');
+const modalContent = document.getElementById('modalContent');  // Editable textarea
+
+// Show modal when the button is clicked
+modalButton.addEventListener('click', function() {
+  // Fetch marquee text from the API
+  fetch('http://localhost:5000/marquee')
+    .then(response => response.json())
+    .then(data => {
+      modalContent.value = data.marqueeText;  // Set fetched text as value in textarea
+    })
+    .catch(error => {
+      console.error('Error fetching marquee text:', error);
+      modalContent.value = 'Failed to load marquee text.';  // Default message on error
+    });
+  
+  // Show the modal
+  marqueeModal.style.display = 'flex';
+});
+
+// Save updated marquee text to the database
+saveModalButton.addEventListener('click', function() {
+  const updatedText = modalContent.value;  // Get the updated text from the textarea
+
+  // Send the updated text to the server to save in the database
+  fetch('http://localhost:5000/save-marquee', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ marqueeText: updatedText })
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log('Marquee text updated successfully');
+        // Optionally, you can also close the modal here
+        marqueeModal.style.display = 'none';
+      } else {
+        console.error('Failed to update marquee text');
+      }
+    })
+    .catch(error => {
+      console.error('Error saving marquee text:', error);
+    });
+});
+
+// Close modal when the close button is clicked
+closeModalButton.addEventListener('click', function() {
+  marqueeModal.style.display = 'none';
+});
+
+// Optional: Close the modal if the user clicks outside of it
+window.addEventListener('click', function(event) {
+  if (event.target === marqueeModal) {
+    marqueeModal.style.display = 'none';
+  }
+});
+   
+
+</script>
+
+    </button>
+
+
+
+
+
+
+    <!-- Tooltip -->
+    <div id="iIntervalTooltip" style="visibility: hidden; width: 250px; background-color: black; color: rgb(255, 255, 255); text-align: center; padding: 5px; border-radius: 5px; position: absolute; right: 50px; top: 50%; transform: translateY(-50%); opacity: 0; transition: opacity 0.3s;">
+        This button sets the time interval in which the data should be shown in branches.
+    </div>
+    </li>
+    </ul>
+  </nav>
+
+  <script>
+    // Burger Icon Animation on Checkbox Checked
+    const checkbox = document.getElementById("burger-toggle");
+const burgerLines = document.querySelectorAll(".burger-line");
+const navMenu = document.querySelector(".nav-menu");
+const logo = document.querySelector(".logo"); // Get the logo element
+
+checkbox.addEventListener("change", () => {
+  if (checkbox.checked) {
+    burgerLines[0].style.transform = "rotate(45deg) translate(5px, 6px)";
+    burgerLines[1].style.opacity = "0";
+    burgerLines[2].style.transform = "rotate(-45deg) translate(5px, -7px)";
+    navMenu.style.right = "0";
+    logo.style.display = "none"; // Hide the logo
+  } else {
+    burgerLines[0].style.transform = "rotate(0) translate(0, 0)";
+    burgerLines[1].style.opacity = "1";
+    burgerLines[2].style.transform = "rotate(0) translate(0, 0)";
+    navMenu.style.right = "-300px";
+    logo.style.display = "block"; // Show the logo
+  }
+});
+
+  </script>
+
+      
+<button class="go-back-btn" onclick="window.history.back()" style="z-index: 1; font-family: 'Saira', sans-serif;">Go Back</button>
+
+
+<!-- <a href="./middle.html" class="go-back-btn"  style="z-index: 1;">Back</a>
+
+
+
+   -->
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <button id="openModal" class="fixed left-4 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg">
+        Advertisments
+    </button> -->
+
+
+    
+
+
+<!-- Modal for Viewing Image -->
+<div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden" style="z-index: 9999;">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-2/3 max-h-screen flex flex-col">
+        <h2 class="text-xl font-semibold mb-4 text-center" style="font-family: 'Saira', sans-serif;">Advertisments</h2>
+
+
+
+        
+
+        <!-- Two Sections Inside Modal -->
+        <div class="flex flex-grow overflow-y-auto">
+            <!-- Left Section: Landscape Mode -->
+            <div class="w-1/2 p-4 border-r border-gray-300">
+                <h1 class="text-2xl font-semibold text-center mb-4" style="font-family: 'Saira', sans-serif;">Ads in Landscape Mode</h1>
+                <div id="imageContainer" class="grid grid-cols-3 gap-2"></div>
+            </div>
+
+
+
+
+
+
+            <!-- Right Section: Portrait Mode -->
+            
+            
+         <!-- Right Section: Portrait Mode -->
+         <div class="w-1/2 p-4" style="padding: 20px;">
+            <h1 style="text-align: center; font-size: 24px; font-weight: bold; font-family: 'Saira', sans-serif;">Ads in Portrait Mode</h1>
+            <div id="image-gallery" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <!-- Images will be inserted here dynamically -->
+            </div>
+        </div>                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            <!-- Modal for image preview -->
+            <div id="image-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; font-family: 'Saira', sans-serif;">
+                <span id="close-modal" style="position: absolute; top: 20px; right: 20px; font-size: 30px; color: white; cursor: pointer;">&times;</span>
+                <img id="modal-image" src="" alt="Image preview" style="max-width: 90%; max-height: 90%;">
+            </div>
+        
+            
+            <script>// Fetch the image list from the server
+                fetch('http://localhost:5000/images-list')
+                    .then(response => response.json())
+                    .then(images => {
+                        const gallery = document.getElementById('image-gallery');
+                        gallery.innerHTML = ""; // Clear previous images
+                
+                        images.forEach(image => {
+                            const imgContainer = document.createElement('div');
+                            imgContainer.style.position = 'relative';
+                            imgContainer.style.display = 'inline-block';
+                            imgContainer.style.margin = '5px';
+                            imgContainer.style.textAlign = 'center';  // Center content inside container
+                
+                            const imgElement = document.createElement('img');
+                            imgElement.src = `http://localhost:5000${image}`;
+                            imgElement.alt = 'Portrait Image';
+                            imgElement.style.width = '100px';
+                            imgElement.style.height = '100px';
+                            imgElement.style.objectFit = 'contain';
+                            imgElement.style.cursor = 'pointer';
+                            imgElement.style.transition = 'transform 0.2s';
+                
+                            imgElement.onmouseover = () => imgElement.style.transform = 'scale(1.1)';
+                            imgElement.onmouseout = () => imgElement.style.transform = 'scale(1)';
+                            imgElement.onclick = () => openModal(image);
+                
+                            // Create delete button
+                            const deleteBtn = document.createElement('button');
+                            deleteBtn.innerText = 'Delete';  // Change text to "Delete"
+                            deleteBtn.style.background = 'red';
+                            deleteBtn.style.color = 'white';
+                            deleteBtn.style.border = 'none';
+                            deleteBtn.style.borderRadius = '5px';
+                            deleteBtn.style.cursor = 'pointer';
+                            deleteBtn.style.padding = '5px 10px';
+                            deleteBtn.style.fontSize = '14px';
+                            deleteBtn.style.marginTop = '5px';  // Add some spacing from the image
+                
+                            // Handle delete click
+                            deleteBtn.onclick = (e) => {
+                                e.stopPropagation(); // Prevent modal from opening on delete click
+                
+                                const imageName = image.split('/').pop(); // Extract file name from path
+                                console.log("Deleting:", imageName); // Debugging log
+                
+                                fetch('http://localhost:5000/delete-image', {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json', // Ensure JSON is sent
+                                    },
+                                    body: JSON.stringify({ imageName }) // Send imageName as JSON
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log("Delete Response:", data);
+                                    imgContainer.remove(); // Remove from UI if successful
+                                })
+                                .catch(err => console.error('Error deleting image:', err));
+                            };
+                
+                            imgContainer.appendChild(imgElement);
+                            imgContainer.appendChild(deleteBtn);
+                            gallery.appendChild(imgContainer);
+                        });
+                    })
+                    .catch(err => console.error("Error fetching images:", err));
+                
+                // Function to open modal
+                function openModal(imageSrc) {
+                    const modal = document.getElementById('image-modal');
+                    const modalImage = document.getElementById('modal-image');
+                    modal.style.display = 'flex';
+                    modalImage.src = `http://localhost:5000${imageSrc}`;
+                }
+                
+                // Close modal
+                document.getElementById('close-modal').onclick = () => {
+                    document.getElementById('image-modal').style.display = 'none';
+                };
+                
+                // Close modal on outside click
+                window.onclick = (event) => {
+                    if (event.target == document.getElementById('image-modal')) {
+                        document.getElementById('image-modal').style.display = 'none';
+                    }
+                };
+                
+
+            </script>
+
+
+        </div>
+
+    
+     <!-- Larger Image View (Initially Hidden) -->
+<div id="largeImageView" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
+    <img id="largeImage" class="max-w-full max-h-full rounded-lg shadow-md"/>
+</div>
+
+    <!-- Upload Image Button (Fixed to Bottom) -->
+    <div class="flex justify-between items-center mt-4">
+        <div>
+            <button id="uploadImageBtn" class="text-white  rounded" style="width: 50px;"><img src="upload.svg" alt=""> </button>
+        </div>
+        <div class="flex justify-center items-center space-x-4 w-full">
+            <div class="text-center " style="margin-left: 500px;">
+                <!-- <button id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded">Close</button> -->
+            </div>
+           
+        </div>
+
+
+
+        <div class="ml-auto" style="margin-left: 500px;">
+            <button id="uploadPortraitBtn" class="text-white rounded" style="width: 50px;" onclick="triggerFileUpload()">
+                <img src="upload.svg" alt="">
+            </button>
+        </div>
+        <input type="file" id="fileInput" style="display: none;" onchange="uploadFile()">
+        
+        <script>
+            function triggerFileUpload() {
+                document.getElementById('fileInput').click();
+            }
+        
+            function uploadFile() {
+                const fileInput = document.getElementById('fileInput');
+                const file = fileInput.files[0];
+        
+                if (!file) return;
+        
+                const formData = new FormData();
+                formData.append("file", file);
+        
+                fetch("http://localhost:5000/upload", {  // Adjust API endpoint if hosted remotely
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => alert("File uploaded successfully"))
+                .catch(error => console.error("Error uploading file:", error));
+            }
+        </script>
+        
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("modal");
+    const closeModalBtn = document.getElementById("closeModal");
+
+    // Close modal when clicking the close button
+    closeModalBtn.addEventListener("click", function () {
+      modal.classList.add("hidden"); // Hide modal
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  });
+</script>
+
+
+        
+    </div>
+    
+   
+
+        <!-- File input (hidden) -->
+        <input type="file" id="imageUploadInput" class="hidden" accept="image/*" />
+
+
+
+                        
+                <div  class="fixed bottom-4 right-4 transform translate-x-0">
+
+
+                    <input type="file" id="fileInput" style="display: none;">
+                    <!-- <button onclick="triggerFileUpload()" 
+                        style="background-color: rgb(7, 168, 243); padding: 10px 20px; font-size: 16px; cursor: pointer; right: 100px;">
+                        Upload at portrait
+                    </button> -->
+
+                </div>
+                
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="uploadImage()" />
+
+    </div>
+
+
+
+                    
+
+    
+</div>
+
+
+
+
+
+
+    <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+
+        <!-- Header Section -->
+        <header class="header">
+            <h1 style="font-family: 'Saira', sans-serif; font-weight: bolder;">OEC CURRENCY MANAGEMENT SYSTEM ADMIN PANEL</h1>
+            <div class="search-container" style="zoom: 1.3;">
+                <input type="text" id="searchInput" placeholder="Search Branch..." oninput="toggleTable()" style="font-family: 'Saira', sans-serif;" />
+            </div>
+        </header>
+
+
+
+
+        <section class="add-data-section">
+            <h2 style="font-weight: bolder; font-family: 'Saira', sans-serif; font-weight: bolder;">Add New Data</h2>
+            <div class="form-card">
+
+                <div style="text-align: center;">
+               
+                  <label for="branch" style="font-size: 1.2em; margin-bottom: 10px; color: #333; font-weight: bolder;"></label>
+                  <select id="branch" 
+                          style="z-index: -1; padding: 10px 20px; font-size: 1em; background: rgba(255, 255, 255, 0.1); 
+                                 border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 15px; color: #000000; outline: none; 
+                                 cursor: pointer; width: 630px; transition: all 0.3s ease; backdrop-filter: blur(10px); 
+                                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -4px 6px rgba(0, 0, 0, 0.1); font-family: 'Saira', sans-serif; font-weight: bolder;">
+                      <option value="" style="color: #000000; font-family: 'Saira', sans-serif; font-weight: bolder;">Loading...</option>
+                  </select>
+                  
+                  <!-- Checkbox and Radio Buttons in the Same Row -->
+                  <div id="ads" style="display: flex; align-items: center; margin-top: 15px;">
+                    <!-- Checkbox -->
+                    <input type="checkbox" id="agreement" style="margin-right: 15px;"/>
+                    <label for="agreement" style="font-size: 1em; font-family: 'Saira', sans-serif; color: #333; font-weight: bolder;">
+                        Enable ADS
+                    </label>
+                 
+                
+                    <!-- Radio Buttons -->
+                    <div style="display: flex; align-items: center; margin-left: 20px;">
+                        <input type="radio" id="option1" name="options" value="option1" style="margin-right: 10px;"/>
+                        <label for="option1" style="font-size: 1em; font-family: 'Saira', sans-serif; color: #333; font-weight: bolder;">
+                            LANDSCAPE MODE
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-left: 15px;">
+                        <input type="radio" id="option2" name="options" value="option2" style="margin-right: 10px;"/>
+                        <label for="option2" style="font-size: 1em; font-family: 'Saira', sans-serif; color: #333; font-weight: bolder;">
+                            PORTRAIT MODE
+                        </label>      
+                    </div>
+                </div>
+                
+                
+                
+                  <div style="display: flex; align-items: center; justify-content: flex-end; padding-right: 5px; gap: 15px;">
+                    <div style="display: none;">
+                        <input type="checkbox" id="myCheckbox" style="transform: scale(1.2);">
+                        <label for="myCheckbox" style="font-size: 1em; color: #333; margin-left: 5px; font-family: 'Saira', sans-serif; font-weight: bolder;">Enable Advertisements</label>
+                    </div>
+                
+                    <div style="display: none;">
+                      <input type="radio" id="portraitMode" style="transform: scale(1.2);" onclick="toggleMode(this, 'landscapeMode')">
+                      <label for="portraitMode" style="font-size: 1em; color: #333; margin-left: 5px; font-family: 'Saira', sans-serif; font-weight: bolder;">Portrait Mode</label>
+                  </div>
+                  
+                  <div style="display: none;">
+                      <input type="radio" id="landscapeMode" style="transform: scale(1.2);" onclick="toggleMode(this, 'portraitMode')">
+                      <label for="landscapeMode" style="font-size: 1em; color: #333; margin-left: 5px; font-family: 'Saira', sans-serif; font-weight: bolder;">Landscape Mode</label>
+                  </div>
+                  
+                  <script>
+
+
+
+    //                 function toggleMode(current, otherId) {
+    //     let otherCheckbox = document.getElementById(otherId);
+    //     if (current.checked) {
+    //         otherCheckbox.checked = false; // Uncheck the other checkbox
+    //     }
+    // }
+                  
+    //                   // Fetch the Ads status and Orientation when the branch changes
+    //                   document.getElementById('branch').addEventListener('change', async function() {
+    //                       const selectedBranch = this.value;
+                  
+    //                       if (selectedBranch) {
+    //                           try {
+    //                               const response = await fetch(`http://localhost:5000/get-ads-status?branchName=${selectedBranch}`);
+    //                               const data = await response.json();
+                  
+    //                               console.log('Fetched Data:', data);  // Log the fetched data for debugging
+                  
+    //                               // Set the checkbox based on the ads status
+    //                               document.getElementById('myCheckbox').checked = data.adsEnabled;
+                  
+    //                               // Handle orientation and set the appropriate checkbox
+    //                               if (data.orientation) {
+    //                                   console.log('Orientation:', data.orientation);
+    //                                   if (data.orientation === 'LANDSCAPE') {
+    //                                       document.getElementById('landscapeMode').checked = true;
+    //                                       document.getElementById('portraitMode').checked = false;
+    //                                   } else if (data.orientation === 'PORTRAIT') {
+    //                                       document.getElementById('portraitMode').checked = true;
+    //                                       document.getElementById('landscapeMode').checked = false;
+    //                                   }
+    //                               } else {
+    //                                   console.log('No orientation data available');
+    //                                   // Optionally handle if no orientation data is available
+    //                               }
+                  
+    //                           } catch (error) {
+    //                               console.error('Error fetching ads status:', error);
+    //                           }
+    //                       }
+    //                   });
+
+
+    //                   async function toggleMode(current, otherId) {
+    //     let otherCheckbox = document.getElementById(otherId);
+    //     if (current.checked) {
+    //         otherCheckbox.checked = false; // Uncheck the other checkbox
+
+    //         // Get the selected branch
+    //         const selectedBranch = document.getElementById('branch').value;
+    //         if (!selectedBranch) {
+    //             console.error("No branch selected");
+    //             return;
+    //         }
+
+    //         // Determine the selected mode
+    //         const newOrientation = current.id === "portraitMode" ? "PORTRAIT" : "LANDSCAPE";
+
+    //         // Send request to update the database
+    //         try {
+    //             const response = await fetch("http://localhost:5000/update-orientation", {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Content-Type": "application/json"
+    //                 },
+    //                 body: JSON.stringify({
+    //                     branchName: selectedBranch,
+    //                     orientation: newOrientation
+    //                 })
+    //             });
+
+    //             const result = await response.json();
+    //             console.log("DB Update Response:", result);
+    //         } catch (error) {
+    //             console.error("Error updating orientation:", error);
+    //         }
+    //     }
+    // }
+
+
+    // async function toggleMode(current, otherId) {
+    //     let otherCheckbox = document.getElementById(otherId);
+    //     if (current.checked) {
+    //         otherCheckbox.checked = false; // Uncheck the other checkbox
+
+    //         // Get the selected branch
+    //         const selectedBranch = document.getElementById('branch').value;
+    //         if (!selectedBranch) {
+    //             console.error("No branch selected");
+    //             return;
+    //         }
+
+    //         // Determine the selected mode
+    //         const newOrientation = current.id === "portraitMode" ? "PORTRAIT" : "LANDSCAPE";
+
+    //         // Send request to update the database
+    //         try {
+    //             const response = await fetch("http://localhost:5000/update-orientation", {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Content-Type": "application/json"
+    //                 },
+    //                 body: JSON.stringify({
+    //                     branchName: selectedBranch,
+    //                     orientation: newOrientation
+    //                 })
+    //             });
+
+    //             const result = await response.json();
+    //             console.log("DB Update Response:", result);
+
+    //         } catch (error) {
+    //             console.error("Error updating orientation:", error);
+    //         }
+    //     }
+    // }
+    //               </script>
+                  
+                </div>
+                
+                    
+<!--                 
+                <script>
+                    document.getElementById('myCheckbox').addEventListener('change', function() {
+                        let selectedBranch = document.getElementById('branch').value;
+                        let checkboxEnabled = this.checked;
+                
+                        if (selectedBranch && checkboxEnabled) {
+                            console.log(`Advertisements enabled for branch: ${selectedBranch}`);
+                        }
+                    });
+                
+                    document.getElementById('branch').addEventListener('change', function() {
+                        let selectedBranch = this.value;
+                        let checkboxEnabled = document.getElementById('myCheckbox').checked;
+                
+                        if (selectedBranch && checkboxEnabled) {
+                            console.log(`Advertisements enabled for branch: ${selectedBranch}`);
+                        }
+                    });
+                </script> -->
+                
+                
+                
+<br><br>
+                <div style="text-align: center;">
+                 
+                    <select id="currency" style="z-index: -1; padding: 10px 20px; font-size: 1em; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 15px; color: #000000; outline: none; cursor: pointer; width: 630px; transition: all 0.3s ease; backdrop-filter: blur(10px); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -4px 6px rgba(0, 0, 0, 0.1); font-family: 'Saira', sans-serif; font-weight: bolder;">
+                        <option value="" style="color: #000000; font-family: 'Saira', sans-serif; font-weight: bolder;">Loading...</option>
+                    </select>
+                </div>
+                
+                <!-- <div style="text-align: center; margin-top: 20px;">
+                    <input type="text" id="currencyDetails" placeholder="Currency Code & Country Code" disabled required style="padding: 10px 20px; font-size: 1em; border-radius: 12px; border: 2px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.1); color: #000000;">
+                </div> -->
+                <br><br><br>
+                <form id="add-form">
+                    
+                    <input type="text" id="branchName" placeholder="Add Branch Name" readonly required style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+                    <input type="text" id="countryName" placeholder="Currency Name" readonly required style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+                    <!-- <input type="text" id="countryCode" placeholder="Currency Code" readonly required style="font-family: 'Saira', sans-serif; font-weight: bolder;"> -->
+
+                    <input type="text" id="buyRate" value="0.000" placeholder="Buy Rate" 
+                    required oninput="validateInput(this)" 
+                    onfocus="clearIfDefault(this)" 
+                    style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+             
+             <input type="text" id="sellRate" value="0.000" placeholder="Sell Rate" 
+                    required oninput="validateInput(this)" 
+                    onfocus="clearIfDefault(this)" 
+                    style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+             
+             <input type="text" id="ttRemittanceRate" value="0.000" placeholder="TTRemittance Rate" 
+                    required oninput="validateInput(this)" 
+                    onfocus="clearIfDefault(this)" 
+                    style="font-family: 'Saira', sans-serif; font-weight: bolder;">
+             
+             <script>
+             function clearIfDefault(input) {
+               if (input.value === '0.000') {
+                 input.value = '';
+               }
+             }
+             </script>
+             
+                     <br><br>
+
+
+<button type="submit" style="background-color: rgb(0, 183, 255); width: 100px; height: 50px; font-family: 'Saira', sans-serif; font-weight: bolder;" id="submitButton" onclick="saveData()" >Save Data</button>
+
+               
+                </form>
+            </div>
+        </section>
+
+
+        
+        <!-- Table Section -->
+        <section class="data-table-section" >
+            <br>
+            <h1 style="font-weight: bolder; font-family: 'Saira', sans-serif; font-family: 'Saira', sans-serif; font-weight: bolder;">Data Overview</h1>
+            <br>
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">ID</th>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">BranchName</th>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">CurrencyName</th>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">Country Code</th>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">Currency Code</th>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">BuyRate</th>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">SellRate</th>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">TTRemittanceRate</th>
+                        <th style="font-family: 'Saira', sans-serif; font-weight: bolder;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody style="font-family: 'Saira', sans-serif; font-weight: bolder;"></tbody>
+            </table>
+        </section>
+
+        <!-- Add New Data Section -->
+      
+        
+    </div>
+
+    
+
+
+
+
+    
+
+
+
+
+
+
+
+<!-- Button & ℹ Button Container -->
+<div style="height: 0.1vh; display: flex; justify-content: flex-end; align-items: center;  left: 350px; gap: 10px; position: absolute; right: 50px; ">
+
+
+
+
+
+
+
+    
+
+    <!-- Open Modal Button -->
+    <!-- <button onclick="openIntervalModal()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: rgb(98, 161, 255); color: white;">Open Interval Modal</button> -->
+
+    <!-- Info Button with Tooltip -->
+   
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div id="iIntervalModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; font-weight: bolder;">
+    <div style="background: rgb(255, 255, 255); padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); text-align: center; position: relative; width: 300px;font-weight: bolder;">
+        <h2>Update Time Interval</h2>
+        
+        <label for="iTimeInput" >Enter Time (Seconds): </label>
+        <input type="number" id="iTimeInput" min="1" placeholder="0000" required style="padding: 10px; margin: 10px; font-size: 16px; background-color: #333; color: white;">
+        
+        <button onclick="updateIntervalTime()" style="padding: 10px 15px; font-size: 16px; cursor: pointer;">Submit</button>
+
+        <!-- Close Button -->
+        <button onclick="closeIntervalModal()" style="display: block; margin-top: 15px; padding: 8px 15px; font-size: 14px; cursor: pointer;">Close</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+    function openIntervalModal() {
+        document.getElementById("iIntervalModal").style.display = "flex";
+    }
+
+    function closeIntervalModal() {
+        document.getElementById("iIntervalModal").style.display = "none";
+    }
+
+    function updateIntervalTime() {
+        let timeInSeconds = document.getElementById("iTimeInput").value;
+        let timeInMilliseconds = timeInSeconds * 1000; // Convert to milliseconds
+
+        fetch("http://localhost:5000/update-time", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ time: timeInMilliseconds })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            closeIntervalModal(); // Close modal after successful update
+        })
+        .catch(error => console.error("Error:", error));
+    }
+
+    function showIntervalTooltip() {
+        let tooltip = document.getElementById("iIntervalTooltip");
+        tooltip.style.visibility = "visible";
+        tooltip.style.opacity = "1";
+    }
+
+    function hideIntervalTooltip() {
+        let tooltip = document.getElementById("iIntervalTooltip");
+        tooltip.style.visibility = "hidden";
+        tooltip.style.opacity = "0";
+    }
+</script>
+
+
+
+    <!-- External JS Script -->
+    <script src="admin.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

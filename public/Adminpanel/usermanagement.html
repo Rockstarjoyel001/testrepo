@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+  <title>User Management</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .branch-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .branch-table th, .branch-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-weight: bolder;
+  }
+
+  .branch-table th {
+    background-color: #ce2323;
+  }
+
+  .branch-table td button {
+    background-color: #f44336;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bolder;
+    width: 100px !important;
+  }
+
+  .branch-table td button:hover {
+    background-color: #d32f2f;
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 40px;
+  }
+
+  .close {
+    color: #000000;
+    float: right;
+    font-size: 28px;
+    font-weight: bolder;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+/* Style for the temporary message box inside the modal */
+.modal-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  display: none;
+}
+
+.modal-message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.modal-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+    
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+
+    body {
+      font-family: 'Saira', sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #e3f2fd);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .back-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    h1 {
+      flex-grow: 1;
+      text-align: center;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow-x: auto;
+    }
+
+    #statusMessage {
+      display: none;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 6px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Saira', sans-serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+
+    
+button.change-password-btn {
+  background-color: #007bff; /* Blue background */
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Saira', sans-serif;
+  font-weight: bold;
+}
+
+button.change-password-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+
+    button.delete-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 45px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Saira', sans-serif;
+    }
+
+    button.delete-btn:hover {
+      background-color: #c82333;
+    }
+
+    #searchInput {
+      width: 100%;
+      max-width: 300px;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      table {
+        font-size: 14px;
+      }
+
+      th, td {
+        padding: 8px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .back-btn {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+
+
+
+    }
+
+
+    /* General button styles */
+.status-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-transform: uppercase;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Active state button */
+.status-btn.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Inactive state button */
+.status-btn.inactive {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Hover effect */
+.status-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus effect */
+.status-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+/* Active state hover effect */
+.status-btn.active:hover {
+  background-color: #45a049;
+}
+
+/* Inactive state hover effect */
+.status-btn.inactive:hover {
+  background-color: #d32f2f;
+}
+
+  </style>
+</head>
+<script>
+  // let inactivityTimer;
+
+  // function goBackOnInactivity() {
+  //   // Go back in history if possible
+  //   if (window.history.length > 1) {
+  //     window.history.back();
+  //   } else {
+      
+  //     window.location.href = '/'; 
+  //   }
+  // }
+
+  // function resetInactivityTimer() {
+  //   clearTimeout(inactivityTimer);
+  //   inactivityTimer = setTimeout(goBackOnInactivity, 20000); // 20 seconds
+  // }
+
+  // // Start the timer and listen to interactions
+  // window.onload = () => {
+  //   resetInactivityTimer();
+  //   ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+  //     document.addEventListener(event, resetInactivityTimer);
+  //   });
+  // };
+</script>
+
+<body>
+  <div class="header">
+    <button class="back-btn" onclick="goBack()" style="font-family: 'Saira', sans-serif;">← Go Back</button>
+    <h1> User Management</h1>
+  </div>
+  
+  <div class="container">
+    <input type="text" id="searchInput" placeholder="Search by Branch...">
+    <button id="openModalBtn" onclick="openModal()" style="background-color: red; color: white; border: 5px solid red; font-family: 'Saira', sans-serif; font-weight: bolder; float: right; border-radius: 50px; cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='darkred'; this.style.borderColor='darkred'" onmouseout="this.style.backgroundColor='red'; this.style.borderColor='red'" onmousedown="this.style.transform='scale(0.95)'; this.style.backgroundColor='#ff3333'; this.style.borderColor='#ff3333'" onmouseup="this.style.transform='scale(1)'; this.style.backgroundColor='darkred'; this.style.borderColor='darkred'">
+      BRANCH 🏦
+    </button>
+    
+    
+    <div id="statusMessage"></div>
+  
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+          <th>Branch</th>
+          <th>Profession</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamic rows will go here -->
+      </tbody>
+    </table>
+  
+    <!-- Button to open the modal -->
+      </div>
+
+  
+
+
+
+
+  <!-- Modal -->
+  <div id="branchesModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      
+      <!-- Search bar to filter branches -->
+      <input type="text" id="branchSearch" placeholder="Search branches..." oninput="filterBranches()">
+      <div id="modalMessage" class="modal-message" style="display: none;"></div>
+      <div id="branchesList"></div>
+      <!-- Temporary message box inside the modal -->
+   
+    </div>
+  </div>
+  
+  
+  <div id="popupMessage" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #333;
+  color: white;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  z-index: 1000;
+  text-align: center;
+">
+</div>
+
+
+
+  <script>
+
+// Store all branches globally
+let allBranches = [];
+
+// Function to open the modal
+function openModal() {
+  document.getElementById('branchesModal').style.display = 'block';
+  fetchBranches(); // Fetch branch names and statuses when the modal opens
+}
+
+// Function to close the modal
+function closeModal() {
+  document.getElementById('branchesModal').style.display = 'none';
+}
+
+// Event listener to close the modal if the user clicks outside of it
+window.onclick = function(event) {
+  if (event.target == document.getElementById('branchesModal')) {
+    closeModal();
+  }
+}
+
+// Fetch branch names and statuses from the server and populate the modal
+function fetchBranches() {
+  Promise.all([
+    fetch('http://localhost:5000/branch-names').then(res => res.json()),
+    fetch('http://localhost:5000/branchesstatus').then(res => res.json())
+  ])
+  .then(([namesData, statusData]) => {
+    // Normalize status data
+    const statusMap = {};
+    statusData.forEach(branch => {
+      let status = branch.STATUS;
+      if (status === "1" || status === "ACTIVE") {
+        status = "ACTIVE";
+      } else {
+        status = "INACTIVE";
+      }
+      statusMap[branch.BRANCH_NAME] = status;
+    });
+
+    // Merge status into branch names
+    allBranches = namesData.map(branch => ({
+      ...branch,
+      STATUS: statusMap[branch.BRANCH_NAME] || "INACTIVE"
+    }));
+
+    populateBranches(allBranches);
+  })
+  .catch(error => {
+    console.error('Error fetching branch data:', error);
+    const branchesList = document.getElementById('branchesList');
+    branchesList.innerHTML = 'Failed to load branch names.';
+  });
+}
+
+// Function to filter branches based on the search input
+function filterBranches() {
+  const searchTerm = document.getElementById("branchSearch").value.toLowerCase();
+  const filteredBranches = allBranches.filter(branch =>
+    branch.BRANCH_NAME.toLowerCase().includes(searchTerm)
+  );
+  populateBranches(filteredBranches);
+}
+
+// Function to populate the branches list dynamically
+function populateBranches(branches) {
+  const branchesList = document.getElementById('branchesList');
+  branchesList.innerHTML = '';
+
+  const table = document.createElement('table');
+  table.classList.add('branch-table');
+
+  const headerRow = document.createElement('tr');
+  const nameHeader = document.createElement('th');
+  nameHeader.textContent = 'Branch Name';
+  const actionHeader = document.createElement('th');
+  actionHeader.textContent = 'Actions';
+  headerRow.appendChild(nameHeader);
+  headerRow.appendChild(actionHeader);
+  table.appendChild(headerRow);
+
+  branches.forEach(branch => {
+    const row = document.createElement('tr');
+
+    const nameCell = document.createElement('td');
+    nameCell.textContent = branch.BRANCH_NAME;
+    row.appendChild(nameCell);
+
+    const actionCell = document.createElement('td');
+
+    // Delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete 🗑️';
+    deleteButton.onclick = function () {
+      deleteBranch(branch.BRANCH_NAME);
+    };
+    actionCell.appendChild(deleteButton);
+
+    // Activate/Deactivate button
+    const activateDeactivateButton = document.createElement('button');
+    const isActive = branch.STATUS === 'ACTIVE';
+    activateDeactivateButton.textContent = isActive ? 'Deactivate' : 'Activate';
+    activateDeactivateButton.style.marginLeft = '15px';
+    activateDeactivateButton.style.backgroundColor = "#57B9FF";
+   
+    
+
+    activateDeactivateButton.onclick = function () {
+      const isActivating = activateDeactivateButton.textContent === 'Activate';
+      const statusValue = isActivating ? 1 : 0;
+
+      if (!isActivating) {
+        // Custom confirmation before deactivating
+        showConfirmation(`Are you sure you want to deactivate Branch ${branch.BRANCH_NAME}?`, async () => {
+          await updateBranchStatus(branch, statusValue, activateDeactivateButton);
+        });
+      } else {
+        updateBranchStatus(branch, statusValue, activateDeactivateButton);
+      }
+    };
+
+    actionCell.appendChild(activateDeactivateButton);
+    row.appendChild(actionCell);
+    table.appendChild(row);
+  });
+
+  branchesList.appendChild(table);
+}
+
+// Update Branch Status Function
+async function updateBranchStatus(branch, statusValue, button) {
+  try {
+    const response = await fetch('http://localhost:5000/update-branch-status', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        branchName: branch.BRANCH_NAME,
+        status: statusValue
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      branch.STATUS = statusValue === 1 ? 'ACTIVE' : 'INACTIVE';
+      button.textContent = statusValue === 1 ? 'Deactivate' : 'Activate';
+      showPopup(`Branch ${branch.BRANCH_NAME} ${statusValue === 1 ? 'activated' : 'deactivated'}`);
+    } else {
+      console.error('Failed to update status:', data.message);
+    }
+  } catch (error) {
+    console.error('Error updating status:', error);
+  }
+}
+
+// Show normal popup message
+function showPopup(message) {
+  const popup = document.getElementById("popupMessage");
+  popup.innerHTML = `<span>${message}</span>`;
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 3000);
+}
+
+// Show custom YES/NO confirmation inside popup
+function showConfirmation(message, onConfirm) {
+  const popup = document.getElementById("popupMessage");
+  popup.innerHTML = `
+    <div style="margin-bottom: 10px;">${message}</div>
+    <button id="yesButton" style="margin: 5px; padding: 8px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Yes</button>
+    <button id="noButton" style="margin: 5px; padding: 8px 20px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">No</button>
+  `;
+  popup.style.display = "block";
+
+  document.getElementById("yesButton").onclick = () => {
+    popup.style.display = "none";
+    onConfirm(); // Call the function passed
+  };
+
+  document.getElementById("noButton").onclick = () => {
+    popup.style.display = "none";
+  };
+}
+
+// Popup Message Function
+function showPopup(message) {
+  const popup = document.getElementById("popupMessage");
+  popup.textContent = message;
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 3000); // 3 seconds
+}
+
+
+
+
+
+
+
+
+
+
+// Delete confirmation and backend logic
+function deleteBranch(branchName) {
+  const existingBox = document.getElementById('custom-confirm-box');
+  if (existingBox) existingBox.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'custom-confirm-box';
+  overlay.style.position = 'fixed';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.zIndex = 9999;
+
+  const box = document.createElement('div');
+  box.style.background = '#fff';
+  box.style.padding = '20px';
+  box.style.borderRadius = '8px';
+  box.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
+  box.style.textAlign = 'center';
+  box.innerHTML = `<p style="margin-bottom: 15px;">Are you sure you want to delete branch "<strong>${branchName}</strong>"?</p>`;
+
+  const yesBtn = document.createElement('button');
+  yesBtn.textContent = 'Yes';
+  yesBtn.style.marginRight = '10px';
+  yesBtn.style.padding = '6px 12px';
+  yesBtn.style.backgroundColor = '#dc3545';
+  yesBtn.style.color = '#fff';
+  yesBtn.style.border = 'none';
+  yesBtn.style.borderRadius = '4px';
+  yesBtn.style.cursor = 'pointer';
+
+  const noBtn = document.createElement('button');
+  noBtn.textContent = 'No';
+  noBtn.style.padding = '6px 12px';
+  noBtn.style.backgroundColor = '#6c757d';
+  noBtn.style.color = '#fff';
+  noBtn.style.border = 'none';
+  noBtn.style.borderRadius = '4px';
+  noBtn.style.cursor = 'pointer';
+
+  yesBtn.onclick = function () {
+    document.body.removeChild(overlay);
+
+    fetch('http://localhost:5000/delete-branch', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ branchName })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const modalMessage = document.getElementById('modalMessage');
+      if (data.message) {
+        modalMessage.textContent = data.message;
+        modalMessage.className = 'modal-message success';
+      } else {
+        modalMessage.textContent = 'Error: ' + data.error;
+        modalMessage.className = 'modal-message error';
+      }
+      modalMessage.style.display = 'block';
+      setTimeout(() => {
+        modalMessage.style.display = 'none';
+      }, 3000);
+      fetchBranches();
+    })
+    .catch(error => {
+      console.error('Error deleting branch:', error);
+      const modalMessage = document.getElementById('modalMessage');
+      modalMessage.textContent = 'Error deleting branch';
+      modalMessage.className = 'modal-message error';
+      modalMessage.style.display = 'block';
+      setTimeout(() => {
+        modalMessage.style.display = 'none';
+      }, 3000);
+    });
+  };
+
+  noBtn.onclick = function () {
+    document.body.removeChild(overlay);
+    const modalMessage = document.getElementById('modalMessage');
+    modalMessage.textContent = '❎ Branch deletion cancelled';
+    modalMessage.className = 'modal-message error';
+    modalMessage.style.display = 'block';
+    setTimeout(() => {
+      modalMessage.style.display = 'none';
+    }, 3000);
+  };
+
+  box.appendChild(yesBtn);
+  box.appendChild(noBtn);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let allUsers = [];
+let branchNames = []; // Store the fetched branch names
+
+// Fetch branch names and populate dropdowns
+function fetchBranchNames() {
+  fetch('http://localhost:5000/branch-names')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data); // Log to check the structure of the data
+      branchNames = data; // Store branch names
+      populateBranchDropdowns(); // Populate dropdowns after fetching
+    })
+    .catch(err => console.error('Error fetching branch names:', err));
+}
+
+// Populate all the branch dropdowns in the user table
+function populateBranchDropdowns() {
+  const allBranchSelects = document.querySelectorAll('.branch-select'); // Assuming class 'branch-select' for branch dropdowns
+
+  allBranchSelects.forEach(select => {
+    // Clear existing options
+    select.innerHTML = '';
+
+    // Add default option
+    const defaultOption = document.createElement('option');
+    defaultOption.textContent = 'Select Branch';
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    select.appendChild(defaultOption);
+
+    // Add fetched branch names as options
+    branchNames.forEach(branchObj => {
+      const option = document.createElement('option');
+      option.value = branchObj.BRANCH_NAME; // Extract branch name from the object
+      option.textContent = branchObj.BRANCH_NAME; // Set the branch name as the option text
+      select.appendChild(option);
+    });
+  });
+}
+
+
+
+
+function populateTable(users) {
+  const tbody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+  tbody.innerHTML = '';
+
+  users.forEach(user => {
+    const row = tbody.insertRow();
+    const statusText = user.status === "1" ? "Active" : "Inactive";
+    const statusClass = user.status === "1" ? "active" : "inactive";
+    
+    row.innerHTML = `
+      <td>${user.id}</td>
+      <td><input type="text" value="${user.username}" onchange="autoUpdateUser(${user.id}, this)"></td>
+      <td>
+        <input type="password" placeholder="ENTER NEW PASSWORD" value="${user.password}" 
+               onchange="autoUpdateUser(${user.id}, this)" 
+               id="passwordInput${user.id}" 
+               style="display: ${user.isPasswordVisible ? 'inline' : 'none'};">
+      </td>
+      <td>
+        <select class="branch-select" onchange="autoUpdateUser(${user.id}, this)">
+          <option value="" disabled>Select Branch</option>
+          ${branchNames.map(branchObj => 
+            `<option value="${branchObj.BRANCH_NAME}" ${user.Branch === branchObj.BRANCH_NAME ? 'selected' : ''}>${branchObj.BRANCH_NAME}</option>`
+          ).join('')}
+        </select>
+      </td>
+      <td>
+        <select onchange="autoUpdateUser(${user.id}, this)">
+          <option value="ADMIN" ${user.Profession === 'ADMIN' ? 'selected' : ''}>ADMIN</option>
+          <option value="USER" ${user.Profession === 'USER' ? 'selected' : ''}>USER</option>
+          <option value="MANAGER" ${user.Profession === 'MANAGER' ? 'selected' : ''}>MANAGER</option>
+        </select>
+      </td>
+      <td>
+        <button class="change-password-btn" onclick="changePassword(${user.id})">Change Password 🔑</button>
+        <button class="delete-btn" onclick="deleteUser(${user.id})">Delete 🗑️</button>
+        <button class="status-btn ${statusClass}" onclick="toggleUserStatus(${user.id}, '${user.status}')">${statusText}</button>
+      </td>
+    `;
+  });
+}
+
+
+
+
+// function toggleUserStatus(userId, currentStatus) {
+//   // Create a custom confirm box
+//   const confirmBox = document.createElement('div');
+//   confirmBox.innerHTML = `
+//     <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: #f0f0f0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); z-index: 9999;">
+//       <p>Are you sure you want to change the status?</p>
+//       <button id="yesButton" style="margin-right: 10px;">Yes</button>
+//       <button id="noButton">No</button>
+//     </div>
+//   `;
+//   document.body.appendChild(confirmBox);
+
+//   // Handle the "Yes" button click
+//   document.getElementById('yesButton').addEventListener('click', () => {
+//     changeUserStatus(userId, currentStatus); // Call the function to change the status
+//     confirmBox.remove(); // Remove the confirm box after the decision
+
+//     // Show a "Status changed" message
+//     const statusMessage = document.createElement('div');
+//     statusMessage.textContent = "Status changed!";
+//     statusMessage.style.position = 'fixed';
+//     statusMessage.style.top = '100px';
+//     statusMessage.style.left = '50%';
+//     statusMessage.style.transform = 'translateX(-50%)';
+//     statusMessage.style.padding = '10px';
+//     statusMessage.style.backgroundColor = 'green';
+//     statusMessage.style.color = 'white';
+//     statusMessage.style.borderRadius = '5px';
+//     document.body.appendChild(statusMessage);
+
+//     // Set a timeout to remove the "Status changed" message after 6 seconds
+//     setTimeout(() => {
+//       statusMessage.remove();
+//     }, 6000);
+//   });
+
+//   // Handle the "No" button click
+//   document.getElementById('noButton').addEventListener('click', () => {
+//     confirmBox.remove(); // Remove the confirm box if the user clicks "No"
+//   });
+// }
+
+// function changeUserStatus(userId, currentStatus) {
+//   const newStatus = currentStatus === "1" ? "0" : "1"; // Toggle between active (1) and inactive (0)
+
+//   // Send a request to update the user's status in the database
+//   fetch(`http://localhost:5000/update-status/${userId}`, {
+//     method: 'PATCH',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ status: newStatus })
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//     if (data.success) {
+//       // Update the button text and class based on the new status
+//       const button = document.querySelector(`#userTable button[onclick="toggleUserStatus(${userId}, '${currentStatus}')"]`);
+//       button.textContent = newStatus === "1" ? "Active" : "Inactive";
+//       button.classList.toggle('active', newStatus === "1");
+//       button.classList.toggle('inactive', newStatus === "0");
+//     } else {
+//       alert('Failed to update status');
+//     }
+//   })
+//   .catch(error => {
+//     console.error('Error updating user status:', error);
+//     alert('Error updating user status');
+//   });
+// }
+
+
+
+
+function toggleUserStatus(userId, currentStatus) {
+  // Create a custom confirm box
+  const confirmBox = document.createElement('div');
+  confirmBox.innerHTML = `
+    <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: #f0f0f0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); z-index: 9999;">
+      <p>Are you sure you want to change the status?</p>
+      <button id="yesButton" style="margin-right: 10px;">Yes</button>
+      <button id="noButton">No</button>
+    </div>
+  `;
+  document.body.appendChild(confirmBox);
+
+  // Handle the "Yes" button click
+  document.getElementById('yesButton').addEventListener('click', () => {
+    const newStatus = currentStatus === "1" ? "0" : "1"; // Toggle between active (1) and inactive (0)
+    changeUserStatus(userId, currentStatus, newStatus); // Pass newStatus to the function
+    confirmBox.remove(); // Remove the confirm box after the decision
+  });
+
+  // Handle the "No" button click
+  document.getElementById('noButton').addEventListener('click', () => {
+    confirmBox.remove(); // Remove the confirm box if the user clicks "No"
+  });
+}
+
+function changeUserStatus(userId, currentStatus, newStatus) {
+  // Send a request to update the user's status in the database
+  fetch(`http://localhost:5000/update-status/${userId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ status: newStatus })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Update the button text and class based on the new status
+      const button = document.querySelector(`#userTable button[onclick="toggleUserStatus(${userId}, '${currentStatus}')"]`);
+      button.textContent = newStatus === "1" ? "Active" : "Inactive";
+      button.classList.toggle('active', newStatus === "1");
+      button.classList.toggle('inactive', newStatus === "0");
+
+      // Show the "Status changed" message
+      const statusMessage = document.createElement('div');
+      const statusText = newStatus === "1" ? "Active" : "Inactive";  // Get the status text
+      statusMessage.textContent = `Status changed to ${statusText}!`;  // Display the status in the message
+      statusMessage.style.position = 'fixed';
+      statusMessage.style.top = '100px';
+      statusMessage.style.left = '50%';
+      statusMessage.style.transform = 'translateX(-50%)';
+      statusMessage.style.padding = '10px';
+      statusMessage.style.backgroundColor = 'green';
+      statusMessage.style.color = 'white';
+      statusMessage.style.borderRadius = '5px';
+      document.body.appendChild(statusMessage);
+
+      // Set a timeout to remove the "Status changed" message after 6 seconds
+      setTimeout(() => {
+        statusMessage.remove();
+      }, 3000);
+    } else {
+      alert('Failed to update status');
+    }
+  })
+  .catch(error => {
+    console.error('Error updating user status:', error);
+    alert('Error updating user status');
+  });
+}
+
+
+
+
+
+
+
+// Function to handle the "Change Password" action
+// Ask for confirmation before showing password input
+function changePassword(userId) {
+  // Remove existing box if any
+  const existingBox = document.getElementById('custom-confirm-box');
+  if (existingBox) existingBox.remove();
+
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'custom-confirm-box';
+  overlay.style.position = 'fixed';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.zIndex = 9999;
+
+  // Create box
+  const box = document.createElement('div');
+  box.style.background = '#fff';
+  box.style.padding = '20px';
+  box.style.borderRadius = '8px';
+  box.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
+  box.style.textAlign = 'center';
+  box.innerHTML = `<p style="margin-bottom: 15px;">Do you want to change the password for this user?</p>`;
+
+  // Yes button
+  const yesBtn = document.createElement('button');
+  yesBtn.textContent = 'Yes';
+  yesBtn.style.marginRight = '10px';
+  yesBtn.style.padding = '6px 12px';
+  yesBtn.style.backgroundColor = '#007bff';
+  yesBtn.style.color = '#fff';
+  yesBtn.style.border = 'none';
+  yesBtn.style.borderRadius = '4px';
+  yesBtn.style.cursor = 'pointer';
+
+  // No button
+  const noBtn = document.createElement('button');
+  noBtn.textContent = 'No';
+  noBtn.style.padding = '6px 12px';
+  noBtn.style.backgroundColor = '#6c757d';
+  noBtn.style.color = '#fff';
+  noBtn.style.border = 'none';
+  noBtn.style.borderRadius = '4px';
+  noBtn.style.cursor = 'pointer';
+
+  // Yes = Show password input
+  yesBtn.onclick = function () {
+    document.body.removeChild(overlay);
+    document.getElementById(`passwordInput${userId}`).style.display = 'inline';
+  };
+
+  // No = Cancel
+  noBtn.onclick = function () {
+    document.body.removeChild(overlay);
+  };
+
+  // Append buttons and box
+  box.appendChild(yesBtn);
+  box.appendChild(noBtn);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
+
+// Fetch users and populate the table
+function fetchUsers() {
+  fetch('http://localhost:5000/usermanagement')
+    .then(res => res.json())
+    .then(data => {
+      allUsers = data;
+      populateTable(allUsers);
+    })
+    .catch(err => console.error('Error fetching users:', err));
+}
+
+
+
+// Password validation function (Frontend)
+function validatePassword(password) {
+  // Must include: 1 lowercase, 1 uppercase, 1 digit, 1 special character, min 8 chars
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+]).{8,}$/;
+  return regex.test(password);
+}
+
+// Show status message function
+function showStatusMessage(message, color = '#28a745') {
+  const statusDiv = document.getElementById('statusMessage');
+  statusDiv.textContent = message;
+  statusDiv.style.color = color;
+  statusDiv.style.display = 'block';
+
+  setTimeout(() => {
+    statusDiv.style.display = 'none';
+  }, 3000);
+}
+
+// Update user details
+function autoUpdateUser(userId, element) {
+  const row = element.closest('tr');
+  const fieldIndex = element.parentElement.cellIndex;
+
+  const updatedField = {};
+  const username = row.cells[1].querySelector('input').value;
+  const password = row.cells[2].querySelector('input').value;
+  const Branch = row.cells[3].querySelector('select').value;
+  const Profession = row.cells[4].querySelector('select').value;
+
+  switch (fieldIndex) {
+    case 1:
+      updatedField.username = username;
+      break;
+    case 2:
+      if (password && !validatePassword(password)) {
+        showStatusMessage('❌ Password must contain at least one uppercase letter, one lowercase letter, one number, one special character (!@#$%^&*()_+), and be at least 8 characters long.', '#dc3545');
+        return;
+      }
+      updatedField.password = password;
+      break;
+    case 3:
+      updatedField.Branch = Branch;
+      break;
+    case 4:
+      updatedField.Profession = Profession;
+      break;
+  }
+
+  fetch(`http://localhost:5000/usermanagement/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedField),
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Update failed');
+    showStatusMessage('✅ User updated successfully');
+  })
+  .catch(err => {
+    console.error('Update error:', err);
+    showStatusMessage('❌ Failed to update user', '#dc3545');
+  });
+}
+
+
+
+
+
+// Custom confirm box and delete logic
+function deleteUser(userId) {
+  // Check if a confirm box already exists
+  const existingBox = document.getElementById('custom-confirm-box');
+  if (existingBox) existingBox.remove();
+
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'custom-confirm-box';
+  overlay.style.position = 'fixed';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.zIndex = 9999;
+
+  // Create box
+  const box = document.createElement('div');
+  box.style.background = '#fff';
+  box.style.padding = '20px';
+  box.style.borderRadius = '8px';
+  box.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
+  box.style.textAlign = 'center';
+  box.innerHTML = `<p style="margin-bottom: 15px;">Are you sure you want to delete this user?</p>`;
+
+  // Yes button
+  const yesBtn = document.createElement('button');
+  yesBtn.textContent = 'Yes';
+  yesBtn.style.marginRight = '10px';
+  yesBtn.style.padding = '6px 12px';
+  yesBtn.style.backgroundColor = '#dc3545';
+  yesBtn.style.color = '#fff';
+  yesBtn.style.border = 'none';
+  yesBtn.style.borderRadius = '4px';
+  yesBtn.style.cursor = 'pointer';
+
+  // No button
+  const noBtn = document.createElement('button');
+  noBtn.textContent = 'No';
+  noBtn.style.padding = '6px 12px';
+  noBtn.style.backgroundColor = '#6c757d';
+  noBtn.style.color = '#fff';
+  noBtn.style.border = 'none';
+  noBtn.style.borderRadius = '4px';
+  noBtn.style.cursor = 'pointer';
+
+  // Add button events
+  yesBtn.onclick = function() {
+    document.body.removeChild(overlay);
+    fetch(`http://localhost:5000/usermanagement/${userId}`, {
+      method: 'DELETE'
+    })
+    .then(res => {
+      if (res.ok) {
+        allUsers = allUsers.filter(user => user.id !== userId);
+        populateTable(allUsers);
+        showStatusMessage('🗑️ User deleted successfully', '#dc3545');
+      } else {
+        showStatusMessage('❌ Failed to delete user', '#dc3545');
+      }
+    })
+    .catch(err => {
+      console.error('Delete error:', err);
+      showStatusMessage('❌ Delete request failed', '#dc3545');
+    });
+  };
+
+  noBtn.onclick = function() {
+    document.body.removeChild(overlay);
+    showStatusMessage('❎ Deletion cancelled', '#6c757d');
+  };
+
+  // Append buttons and box
+  box.appendChild(yesBtn);
+  box.appendChild(noBtn);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
+
+
+
+
+
+
+
+// Show status messages to the user
+function showStatusMessage(message, color = '#28a745') {
+  const msgBox = document.getElementById('statusMessage');
+  msgBox.textContent = message;
+  msgBox.style.backgroundColor = color;
+  msgBox.style.color = '#fff';
+  msgBox.style.display = 'block';
+
+  setTimeout(() => {
+    msgBox.style.display = 'none';
+  }, 3000);
+}
+
+// Filter users by branch using the search input
+document.getElementById('searchInput').addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  const filtered = allUsers.filter(user => user.Branch.toLowerCase().includes(query));
+  populateTable(filtered);
+});
+
+// Go back to the previous page
+function goBack() {
+  window.history.back();
+}
+
+// Fetch the branch names and users when the page loads
+fetchBranchNames();
+fetchUsers();
+
+
+
+
+
+  </script>
+</body>
+</html>

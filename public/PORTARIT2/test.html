@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+  <title>Orient Exchange - Currency Rate Sheet</title>
+  <link rel="stylesheet" href="TEST.CSS">
+  <style>
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div>
+      <!-- Header -->
+      <div class="header">
+        <div class="logo">
+          <img src="OEC Logo  copy.jpg" alt="Orient Exchange Logo">
+        </div>
+        <div class="company-text" style="font-family: 'Saira', sans-serif;">
+          <h1>ORIENT EXCHANGE CO.(LLC)</h1>
+          <div class="branch" style="font-weight: bolder; font-family: 'Saira', sans-serif;"> <span id="branch-name"> </span>&nbsp;&nbsp;BRANCH</span></div>
+          <script>
+            // Retrieve the branch name from localStorage
+            const branch = localStorage.getItem('branchName') || 'Default Branch'; // Fallback if not found
+            document.getElementById('branch-name').textContent = branch;
+          </script>
+        </div>
+        <div class="update-date" style="display: none;">
+          Updated as on: <span id="current-time"></span>
+        </div>
+        
+        <script>
+          // Function to format the current time (Hour:Minute AM/PM)
+          function formatTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            // Convert 24-hour format to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // Handle 0 as 12
+            return `${hours}:${minutes} ${ampm}`;
+          }
+      
+          // Display the current time in the div
+          document.getElementById('current-time').textContent = formatTime();
+      
+          // Update the time every minute
+          setInterval(() => {
+            document.getElementById('current-time').textContent = formatTime();
+          }, 60000);  // Update every 1 minute
+        </script>
+      </div>
+      
+      
+
+      <!-- Nameplate -->
+      <div class="nameplate" style="font-family: 'Saira', sans-serif;">💱 CURRENCY RATE SHEET 💱</div>
+
+      <!-- Currency Table -->
+      <table >
+        <thead>
+          <tr>
+            <th>CURRENCY</th>
+            <th>BUY RATE</th>
+            <th>SELL RATE</th>
+            <th>TT RATE</th>
+          </tr>
+        </thead>
+        <tbody id="country-rates-body">
+          <!-- This will be populated by JavaScript -->
+        </tbody>
+        <tfoot>
+          <tr>
+                 </tr>
+            <td colspan="4" id="update-time" style="text-align: right; font-size: large; font-weight: bolder;background-color:#004080; color: white; font-family: 'Saira', sans-serif;">UPDATED AS ON: </td>
+          <script>
+           // Function to update the timestamp
+           function updateTimestamp() {
+            const now = new Date();
+
+const months = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const monthName = months[now.getMonth()];
+const day = now.getDate(); // No leading zero
+const year = now.getFullYear();
+
+let hours = now.getHours();
+const minutes = String(now.getMinutes()).padStart(2, '0');
+const ampm = hours >= 12 ? 'PM' : 'AM';
+hours = hours % 12 || 12; // 0 becomes 12
+
+const formattedDate = `${monthName} ${day}, ${year} at ${hours}:${minutes} ${ampm}`;
+document.getElementById('update-time').textContent = 'UPDATED AS ON: ' + formattedDate;
+
+}
+
+
+
+  // Call the function to set the current date and time
+  updateTimestamp();
+          </script>
+        </tfoot>
+      </table>
+
+      <!-- Advertisement Section -->
+      <div class="ad-section">
+        <img src="https://via.placeholder.com/728x80?text=Your+Ad+Here" alt="Advertisement">
+      </div>
+    </div>
+
+    <!-- Marquee -->
+    <div class="marquee-container">
+      <marquee id="marqueeText" behavior="scroll" direction="left" scrollamount="6" style="font-family: 'Saira', sans-serif;">
+        Loading marquee text...
+      </marquee>
+    </div>
+    
+  </div>
+
+  <script src="TEST.JS"></script>
+
+</body>
+</html>

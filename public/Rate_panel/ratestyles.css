@@ -1,0 +1,395 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #444444, #242424);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.5s ease-out;
+}
+
+/* Main Container */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    animation: slideIn 1s ease-out;
+    zoom: 0.9;
+}
+
+.container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
+h1 {
+    color: #fff;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Selector */
+.selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+    font-size: 18px;
+    width: fit-content;
+    margin: 20px auto;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.selector:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.selector label {
+    color: #fff;
+}
+
+/* @keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff1a1a, 0 0 15px #ff0000;
+    }
+    50% {
+        text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff1a1a, 0 0 30px #ff0000;
+    }
+    100% {
+        text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff1a1a, 0 0 15px #ff0000;
+    }
+} */
+
+#branchName {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: rgb(255, 0, 0);
+    
+    /* Glowing Effect */
+    animation: glow 1.5s infinite alternate;
+}
+
+
+/* Inputs */
+select, input[type="checkbox"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 6px 6px 10px rgba(0, 0, 0, 0.1), inset -6px -6px 10px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    font-size: 16px;
+    color: white;
+}
+
+select:focus, input[type="checkbox"]:focus {
+    border-color: #e6d819;
+    outline: none;
+    box-shadow: 0 0 10px rgba(230, 216, 25, 0.6);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+}
+
+th, td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+}
+
+th {
+    background: #e6d819;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}
+
+/* Button Styling */
+button {
+    padding: 12px 30px;
+    background: rgba(52, 152, 219, 0.8);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 8px 8px 15px #333, -8px -8px 15px #333;
+    zoom: 0.7;
+}
+
+button:hover {
+    background: rgba(52, 152, 219, 1);
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideIn {
+    0% { transform: translateY(50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+
+.go-back-btn {
+    position: absolute;
+    top: 250px;
+    left: 30px;
+    padding: 10px 20px;
+    background: #ff0015; /* Red color for visibility */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    zoom: 0.7;
+}
+
+.go-back-btn:hover {
+    background: #e84118;
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1440px) and (min-height: 900px) {
+  
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        animation: slideIn 1s ease-out;
+        zoom: 0.8;
+    }
+    
+}   
+
+@media screen and (orientation: landscape) and (max-width: 1366px) and (min-height: 768px) {
+      
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        animation: slideIn 1s ease-out;
+        zoom: 0.7;
+    }
+}    
+
+@media screen and (orientation: landscape) and (max-width: 1360px) and (min-height: 768px) {
+      
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        animation: slideIn 1s ease-out;
+        zoom: 0.7;
+    }
+}    
+  
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 720px) {
+      
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        animation: slideIn 1s ease-out;
+        zoom: 0.7;
+    }
+}   
+
+
+@media screen and (orientation: landscape) and (max-width: 1176px) and (min-height: 664px) {
+      
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        animation: slideIn 1s ease-out;
+        zoom: 0.6;
+    }
+}   
+
+
+@media screen and (orientation: landscape) and (max-width: 1024px) and (min-height: 768px) {
+      
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        animation: slideIn 1s ease-out;
+        zoom: 0.7;
+    }
+    .logo{
+        display: none;
+    }
+}   
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 800px) and (min-height: 600px) {
+      
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        animation: slideIn 1s ease-out;
+        zoom: 0.5;
+    }
+    .logo{
+        display: none;
+    }
+}
+
+
+
+
+
+.csv-button {
+    position: absolute;
+    top: 310px;
+    left: 30px;
+    padding: 10px 20px;
+    background: #ff0015; /* Red color for visibility */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    zoom: 0.7;
+}
+
+
+.csv-button:hover {
+    background: #e84118;
+    transform: scale(1.05);
+}
+
+
+.download-button {
+    position: absolute;
+    top: 370px;
+    left: 30px;
+    padding: 10px 20px;
+    background: #ff0015; /* Red color for visibility */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    zoom: 0.7;
+}
+
+
+.download-button:hover {
+    background: #e84118;
+    transform: scale(1.05);
+}

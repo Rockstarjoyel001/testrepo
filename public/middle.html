@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    
+  <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+
+
+    <title>CURRENCY RATE SHEET APPLICATION</title>
+    <link rel="stylesheet" href="middle.css">
+</head>
+<body>
+    <!-- Logo Section -->
+    <div style="position: absolute; top: 20px; left: 20px; width: 350px; height: 200px;">
+        <img src="OEC Logo .jpg" alt="" style="width: 200px; height: 100px;">
+      </div>
+      
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1  style=" font-family: 'Saira', sans-serif; "><i class="" style="color: #000000; "></i>OEC CURRENCY MANAGEMENT SYSTEM</h1>
+        
+        <div class="pathway">
+            <div class="card">
+                <h2 style=" font-family: 'Saira', sans-serif; color: black;">Rate Panel</h2>
+                <p style=" font-family: 'Saira', sans-serif; font-style: italic;"  >Manage and update the currency rates for different countries.</p>
+                <a href="Rate_panel/ratepanel.html">
+                    <button class="action-button" style=" font-family: 'Saira', sans-serif;" >Go to Rate Panel</button>
+                </a>
+            </div>
+            
+            <div class="card">
+
+              
+                <h2 style=" font-family: 'Saira', sans-serif; color: black;" >View Rate</h2>
+                <p style=" font-family: 'Saira', sans-serif; font-style: italic;" >Display the current rates for all available currencies.</p>
+                <a href="javascript:void(0)">
+                    <button class="action-button" onclick="handleButtonClick()" style=" font-family: 'Saira', sans-serif;" >View Rates</button>
+                </a>
+            </div>
+
+            <div class="card" id="adminSection" style="display: none;">
+                <h2 style=" font-family: 'Saira', sans-serif; color: black;" >Admin Panel</h2>
+                <p style=" font-family: 'Saira', sans-serif; font-style: italic;" >Access the admin panel for advanced settings.</p>
+                <a href="Adminpanel/admin.html">
+                    <button class="action-button" style=" font-family: 'Saira', sans-serif;" >Go to Admin Panel</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: red; color: white; padding: 10px 20px; border-radius: 5px; z-index: 1000;"></div>
+
+
+    <!-- Logout Button -->
+    <!-- <button id="logoutBtn" class="logout-button" style=" font-family: 'Saira', sans-serif;">Log Out</button> -->
+    <button id="logoutBtn" class="logout-button" style="font-family: 'Saira', sans-serif;">
+        <img src="logout (1).png" alt="Logout" style="width: 20px; height: 25px; vertical-align: middle; margin-right: 8px;">
+        Log Out
+      </button>
+      
+    <script>
+
+
+
+// Function to handle the button click and fetch orientation
+async function handleButtonClick() {
+    const username = localStorage.getItem("username"); // Get username from localStorage
+    const branchName = localStorage.getItem('branchName') || 'UNITED ARAB EMIRATES'; // Default if no branchName in localStorage
+
+    // Check if the user is an admin or manager and redirect immediately
+    if (username) {
+        try {
+            const response = await fetch(`http://localhost:5000/getUserProfession?username=${username}`);
+            const data = await response.json();
+
+            // If the user is an admin or manager, skip orientation fetch and go directly to the demo page
+            if (data.Profession === "" || data.Profession === "") {
+                console.log('User is an Admin or Manager. Redirecting to demo page...');
+                window.location.href = 'PORTARIT2/test.html';
+                return; // Exit the function here to prevent further execution
+            }
+        } catch (error) {
+            console.error("Error fetching user profession:", error);
+        }
+    }
+
+    // Proceed with fetching orientation if the user is not an admin or manager
+    fetchOrientation(branchName);
+}
+
+// Function to fetch orientation from the backend
+function fetchOrientation(branchName) {
+    fetch('http://127.0.0.1:5000/api/getOrientation', { // This is your backend endpoint
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ branchName: branchName }) // Pass branchName in the request body
+    })
+    .then(response => response.json()) // Expecting a JSON response
+    .then(data => {
+        if (data.orientation) {
+            console.log(`Orientation for ${branchName}: ${data.orientation}`);
+            
+            // Redirect based on the orientation fetched
+            if (data.orientation === 'LANDSCAPE') {
+                // If orientation meets some condition, navigate to page 1
+                window.location.href = 'Landscape/index.html';
+            } else {
+                // Otherwise, navigate to page 2
+                window.location.href = 'PORTARIT2/test.html';
+            }
+        } else {
+            console.log('No orientation found.');
+            // Optionally, show an error or message if orientation is not found
+        }
+    })
+    .catch(error => console.error('Error fetching orientation:', error));
+}
+
+// Logout functionality
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    sessionStorage.clear();
+    window.location.href = 'index.html';  // Redirect to login page
+});
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const username = localStorage.getItem("username"); // Get username from localStorage
+    console.log("Stored username:", username); // Debugging
+
+    const adminSection = document.getElementById("adminSection");
+
+    if (username) {
+        try {
+            const response = await fetch(`http://localhost:5000/getUserProfession?username=${username}`);
+            const data = await response.json();
+
+            console.log("Fetched profession:", data.Profession); // Debugging
+
+            if (data.Profession === "ADMIN"  || data.Profession === "MANAGER" ) {
+                adminSection.style.display = "block"; // Show the section for admins
+            } else {
+                adminSection.style.display = "none"; // Hide for non-admin users
+            }
+        } catch (error) {
+            console.error("Error fetching user profession:", error);
+        }
+    }
+});
+
+
+
+// const storedUsername = localStorage.getItem('username'); // Assuming username is already saved
+// console.log('Stored username:', storedUsername);
+
+// // Call backend to check user status
+// fetch(`http://localhost:5000/check-user-status?username=${storedUsername}`)
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log('Received data:', data); // Log the entire data object
+
+//     // Check if the user is inactive
+//     if (data.status === 'inactive') {
+//       // Show the custom message with overlay
+//       showMessage("Hey..You Are Restricted To Use Me...Contact IT Support");
+
+//       // Clear any session or local storage data if necessary
+//       localStorage.removeItem('username');
+      
+//       // Disable user interaction immediately
+//       disableUserInteraction();
+
+//       // Redirect to login or homepage after 5 seconds
+//       setTimeout(() => {
+//         window.location.href = 'index.html'; // Or wherever you want to redirect
+//       }, 5000);  // Redirect after 5 seconds
+//     } else if (data.status === 'active') {
+//       console.log('User is active.');
+//     } else if (data.status === 'unknown') {
+//       console.log('User status unknown:', data.message); // Log invalid status value
+//     } else if (data.status === 'user not found') {
+//       console.log('User not found.');
+//     }
+//   })
+//   .catch(error => {
+//     console.error('Error:', error);
+//   });
+
+// // Function to show the custom message with overlay
+// function showMessage(message) {
+//   // Create overlay div
+//   const overlay = document.createElement('div');
+//   overlay.style.position = 'fixed';
+//   overlay.style.top = '0';
+//   overlay.style.left = '0';
+//   overlay.style.width = '100%';
+//   overlay.style.height = '100%';
+//   overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+//   overlay.style.zIndex = '1000';
+//   overlay.style.display = 'flex';
+//   overlay.style.justifyContent = 'center';
+//   overlay.style.alignItems = 'center';
+//   overlay.style.fontSize = '18px';
+//   overlay.style.color = 'white';
+//   overlay.style.fontWeight = 'bold';
+//   overlay.id = 'overlay';  // Give it an ID for potential removal later
+  
+//   // Create message div
+//   const messageDiv = document.createElement('div');
+//   messageDiv.textContent = message;
+//   messageDiv.style.backgroundColor = 'red';
+//   messageDiv.style.padding = '20px 40px';
+//   messageDiv.style.borderRadius = '10px';
+//   messageDiv.style.fontSize = '20px';
+//   messageDiv.style.textAlign = 'center';
+
+//   // Append the message div inside the overlay
+//   overlay.appendChild(messageDiv);
+
+//   // Append the overlay to the body
+//   document.body.appendChild(overlay);
+
+//   // Hide the message and remove overlay after 5 seconds
+//   setTimeout(() => {
+//     overlay.style.display = 'none'; // Hide the overlay and message
+//   }, 5000);
+// }
+
+
+
+
+
+
+const storedUsername = localStorage.getItem('username');
+console.log('Stored username:', storedUsername);
+
+// Array of 10 custom messages
+const messages = [
+ "🚫 Access Denied! Please reach out to IT support.",
+
+"❌ Oops! You're not allowed to proceed. Contact IT.",
+
+"⚠️ Hey..You Are Restricted To Use Me...Contact IT Support.",
+
+"🔒 Your access has been blocked. IT support is your next stop.",
+
+"🚷 Permission Denied! Contact your IT administrator.",
+
+"🚨 Looks like you're restricted! Ping the IT team.",
+
+"⛔ This Application is currently unavailable for you. Reach out to IT.",
+
+"✋ Stop right there! You need approval from IT.",
+
+"🚫 You're on a restricted list. Get in touch with IT support.",
+
+"❗ Uh-oh! You're not authorized. IT support can help."
+];
+
+// Function to get a random message
+function getRandomMessage() {
+  return messages[Math.floor(Math.random() * messages.length)];
+}
+
+// Call backend to check user status
+fetch(`http://localhost:5000/check-user-status?username=${storedUsername}`)
+  .then(response => response.json())
+  .then(data => {
+    console.log('Received data:', data);
+
+    if (data.status === 'inactive') {
+      // Show a random custom message
+      showMessage(getRandomMessage());
+
+      // Clear any session or local storage data if necessary
+      localStorage.removeItem('username');
+
+      // Disable user interaction
+      disableUserInteraction();
+
+      // Redirect to login after 5 seconds
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 5000);
+    } else if (data.status === 'active') {
+      console.log('User is active.');
+    } else if (data.status === 'unknown') {
+      console.log('User status unknown:', data.message);
+    } else if (data.status === 'user not found') {
+      console.log('User not found.');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+// Function to show the custom message with overlay
+function showMessage(message) {
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  overlay.style.zIndex = '1000';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.fontSize = '18px';
+  overlay.style.color = 'white';
+  overlay.style.fontWeight = 'bold';
+  overlay.id = 'overlay';
+
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  messageDiv.style.backgroundColor = 'red';
+  messageDiv.style.padding = '20px 40px';
+  messageDiv.style.borderRadius = '10px';
+  messageDiv.style.fontSize = '20px';
+  messageDiv.style.textAlign = 'center';
+
+  overlay.appendChild(messageDiv);
+  document.body.appendChild(overlay);
+
+  setTimeout(() => {
+    overlay.style.display = 'none';
+  }, 5000);
+}
+
+// Disable interaction
+function disableUserInteraction() {
+  document.body.style.pointerEvents = 'none';
+  document.body.style.opacity = '0.6';
+}
+
+
+
+
+
+
+
+// Function to disable user interaction
+function disableUserInteraction() {
+
+  const allElements = document.querySelectorAll('button, a, input, textarea, select, a, div');
+  allElements.forEach(element => {
+    element.setAttribute('disabled', 'true');
+    element.style.pointerEvents = 'none'; // Disable mouse events for all elements
+  });
+
+  // Disable all mouse and keyboard events
+  document.body.style.pointerEvents = 'none'; // Disable pointer events for the body
+  document.body.style.userSelect = 'none'; // Disable text selection
+  
+  // Prevent keyboard input
+  window.addEventListener('keydown', preventKeyboardInput);
+  window.addEventListener('mousedown', preventMouseInput);
+}
+
+// Prevent keyboard input by blocking all key events
+function preventKeyboardInput(event) {
+  event.preventDefault();
+}
+
+// Prevent mouse interaction by blocking all mouse events
+function preventMouseInput(event) {
+  event.preventDefault();
+}
+
+
+
+
+  
+    </script>
+    
+    
+</body>
+</html>

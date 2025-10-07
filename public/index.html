@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEC CURRENCY MANAGEMENT SYSTEM</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Ponomar&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #e3f2fd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-container {
+  background: #ffee00;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 400px;
+  color: black;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.title {
+  font-family: 'Saira', sans-serif;
+  font-weight: bolder;
+  color: #000;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.login-container h1 {
+  font-family: 'Saira', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.login-container label {
+  font-family: 'Saira', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.login-container input {
+  font-family: 'Saira', sans-serif;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #000;
+  outline: none;
+  margin-bottom: 20px;
+  transition: 0.4s;
+}
+
+.login-container input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.login-container button {
+  font-family: 'Saira', sans-serif;
+  width: 100%;
+  padding: 12px;
+  background: rgb(68, 68, 68);
+  color: rgb(255, 207, 0);
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-container button:hover {
+  background: linear-gradient(45deg, #388e3c, #66bb6a);
+  transform: translateY(-3px);
+}
+
+.login-container p {
+  color: red;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.logout-button {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 25px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 480px) {
+  .login-container {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .login-container h1 {
+    font-size: 18px;
+  }
+
+  .login-container input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .login-container button {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .logout-button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 1360px) and (min-height: 768px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+    transform: scale(0.7) !important;
+    transform-origin: center center;
+  
+  }
+
+  }
+
+
+  
+@media screen and (orientation: landscape) and (max-width: 1366px) and (min-height: 768px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+    transform: scale(0.7) !important;
+    transform-origin: center center;
+  
+  }
+
+  }
+
+
+    
+@media screen and (orientation: landscape) and (max-width: 800px) and (min-height: 600px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+    transform: scale(0.5) !important;
+    transform-origin: center center;
+  
+  }
+
+  }
+
+    
+@media screen and (orientation: landscape) and (max-width: 1768px) and (min-height: 992px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+  
+  }
+
+  }
+
+
+
+    
+@media screen and (orientation: landscape) and (max-width: 1176px) and (min-height: 664px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+    transform: scale(0.7) !important;
+    transform-origin: center center;
+  }
+
+  }
+  
+  
+    
+@media screen and (orientation: landscape) and (max-width: 1440px) and (min-height: 900px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+  
+  }
+
+  }
+
+    
+@media screen and (orientation: landscape) and (max-width: 1600px) and (min-height: 900px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+  
+  }
+
+  }
+
+    
+@media screen and (orientation: landscape) and (max-width: 1680px) and (min-height: 1050px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+  
+  }
+
+  }
+  
+
+
+    
+@media screen and (orientation: landscape) and (max-width: 1600px) and (min-height: 1024px) {
+
+
+  .login-container {
+    background: #ffd726 !important;
+  
+  }
+
+  }
+  
+  
+  
+  
+
+
+
+  .forgotPasswordModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+    padding-top: 60px;
+  }
+
+  .forgotPasswordModalContent {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+  }
+
+  .forgotPasswordClose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .forgotPasswordClose:hover,
+  .forgotPasswordClose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+
+  
+  @media screen and (orientation: landscape) and (max-width: 1280px) and (min-height: 720px) {
+    .login-container {
+      transform: scale(0.7) !important;
+      transform-origin: center center;
+    }
+  }
+  
+  </style>
+</head>
+<body>
+
+
+  <div class="logo-container">
+    
+  <div style="position: absolute; top: 20px; left: 20px; width: 350px; height: 200px;" class="glossy-containe">
+    <img class="logo" src="OEC Logo .jpg" alt="" style="width: 200px; height: 95px;">
+  </div>     
+  </div>
+  
+<!-- 
+  <button id="logoutBtn" class="logout-button">Exit</button> -->
+
+  <div class="login-container">
+    <h2 style="color: rgb(0, 0, 0); font-family: 'Saira', sans-serif; font-weight: bolder;">OEC CURRENCY MANAGEMENT SYSTEM</h2>
+
+
+
+ 
+    <form id="loginForm">
+      <h1 style="font-family: 'Saira', sans-serif;">Login</h1>
+      <label style="font-family: 'Saira', sans-serif; font-weight: bold;" for="username">Username:</label>
+      <input type="text" id="username" name="username" style="font-family: 'Saira', sans-serif;" required>
+      <label style="font-family: 'Saira', sans-serif;font-weight: bold; " for="password">Password:</label>
+      <input type="password" id="password" name="password" style="font-family: 'Saira', sans-serif;" required>
+      <button style="font-family: 'Saira', sans-serif;" type="submit" class="login">Login</button>
+      <p id="message"></p>
+    </form>
+  </div>
+
+
+
+  
+  <!-- Ensure index.js is loaded last -->
+  <script src="index.js">
+    const { ipcRenderer } = require('electron');
+
+// Call this function to trigger portrait mode rotation
+function rotateToPortrait() {
+  ipcRenderer.send('rotate-to-portrait');
+}
+const API_URL = "http://localhost:5000/login"; // Your Node.js backend URL
+
+// Function to display messages with animations
+function showMessage(text, type) {
+    const messageBox = document.createElement('div');
+    messageBox.textContent = text;
+    messageBox.style.position = "fixed";
+    messageBox.style.top = "-50px";  // Start off-screen
+    messageBox.style.left = "50%";
+    messageBox.style.transform = "translateX(-50%)";
+    messageBox.style.padding = "12px 24px";
+    messageBox.style.borderRadius = "8px";
+    messageBox.style.fontWeight = "bold";
+    messageBox.style.fontSize = "16px";
+    messageBox.style.zIndex = "1000";
+    messageBox.style.boxShadow = "0px 5px 10px rgba(0, 0, 0, 0.2)";
+    messageBox.style.transition = "top 0.5s ease-out, opacity 0.5s ease-in-out";
+
+    if (type === "success") {
+        messageBox.style.backgroundColor = "#28a745";
+        messageBox.style.fontFamily = "'Saira', sans-serif"; // Corrected
+        messageBox.style.color = "#fff";
+    } else {
+        messageBox.style.backgroundColor = "#dc3545";
+        messageBox.style.color = "#fff";
+        messageBox.style.fontFamily = "'Saira', sans-serif"; // Corrected
+    }
+
+    document.body.appendChild(messageBox);
+
+ // Slide-in animation (faster, 10ms delay)
+setTimeout(() => {
+    messageBox.style.transition = "top 0.1s ease-in-out"; // Add transition for smooth slide-in
+    messageBox.style.top = "50px"; // Slide-in speed adjusted by reducing time
+}, 10); // Reduced delay for faster appearance
+
+// Fade-out and remove after 4 seconds
+setTimeout(() => {
+    messageBox.style.transition = "opacity 0.05s ease-out"; // Smooth fade-out with 50ms
+    messageBox.style.opacity = "0";
+    setTimeout(() => {
+        messageBox.remove();
+    }, 50); // Allow for fade-out to complete before removing
+}, 8000); // Fade-out starts after 4 seconds for quicker transition
+
+}
+
+
+document.getElementById("loginForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        });
+
+        const result = await response.json();
+        console.log("Raw response:", result);
+
+        if (!response.ok) {
+            throw new Error(result.message || "Something went wrong");
+        }
+
+        if (result.success) {
+            // Array of random success messages
+            const successMessages = [
+                
+                "You're in! Welcome to the system! 🎉",
+               
+              
+                "Login successful! You're ready to take on the world! 💥"
+            ];
+
+            // Pick a random message
+            const randomMessage = successMessages[Math.floor(Math.random() * successMessages.length)];
+
+            // Get current time
+            const currentHour = new Date().getHours();
+
+            let greeting;
+
+            // Determine the time of day for the greeting
+            if (currentHour >= 6 && currentHour < 12) {
+                greeting = "Good Morning";
+            } else if (currentHour >= 12 && currentHour < 18) {
+                greeting = "Good Afternoon";
+            } else {
+                greeting = "Good Evening";
+            }
+
+            // Display the random success message
+            showMessage(`${greeting} ${result.branchName} Branch..!! ${randomMessage}`, "success");
+
+            localStorage.setItem("username", result.username || "default_username");
+            localStorage.setItem("branchName", result.branchName || "default_branch");
+
+            setTimeout(() => {
+                window.location.href = "middle.html"; // Redirect to the next page
+            }, 1000);
+        } else {
+            // Fetch the branch name from local storage or show the default message
+            const branchName = localStorage.getItem("branchName");
+
+            const messages = branchName
+              ? [
+                `❌ Sorry ${branchName} Branch.. Login Failed! Please check your credentials.`,
+              
+                ]
+              : [
+                "❌ Sorry.. Login Failed! Please check your credentials.",
+              
+                "🕵️‍♂️ Unauthorized entry detected. Retry.",
+                "🧮 The system couldn’t verify you. Try again.",
+                ];
+            
+            // Pick a random message
+            const errorMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            showMessage(errorMessage, "error");
+            
+        }
+    } catch (error) {
+        showMessage("⚠️ Database Connection failed: " + error.message, "error");
+        console.error(error);
+    }
+});
+
+
+// Clear login fields on page load
+window.onload = function() {
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+};
+
+// Rotate screen function
+let isPortrait = true;
+function rotateScreen() {
+    const body = document.body;
+    if (isPortrait) {
+        body.style.transform = "rotate(90deg)";
+        body.style.width = "100vh";
+        body.style.height = "100vw";
+        body.style.overflow = "hidden";
+    } else {
+        body.style.transform = "rotate(0deg)";
+        body.style.width = "auto";
+        body.style.height = "auto";
+        body.style.overflow = "auto";
+    }
+    isPortrait = !isPortrait;
+}
+
+// Key press event listener
+window.addEventListener('keydown', (event) => {
+    console.log('Key Pressed:', event.key);
+});
+
+
+  </script>  <!-- This runs in the renderer process -->
+</body>
+</html>

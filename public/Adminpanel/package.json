@@ -1,0 +1,20 @@
+{
+  "name": "adminpanel",
+  "version": "1.0.0",
+  "main": "admin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "adminpanel": "file:",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mssql": "^11.0.1",
+    "multer": "^1.4.5-lts.1"
+  }
+}
