@@ -10,6 +10,7 @@ const moment = require('moment'); // install this via npm install moment
 const PORT = process.env.PORT || 5000;
 const config = require("./config");
 // const PORT = process.env.PORT || Math.floor(Math.random() * (65535 - 1024) + 1024);
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors({
     origin: '*',
