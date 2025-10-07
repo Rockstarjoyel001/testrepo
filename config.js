@@ -8,7 +8,7 @@ const config = {
 
     password: 'TesT99$',
 
-    server: 'OECSERVER4',
+    server: '192.168.140.154',
 
     database: 'DEV_TEST',
 
