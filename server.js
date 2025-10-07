@@ -11,7 +11,9 @@ const PORT = process.env.PORT || 5000;
 const config = require("./config");
 // const PORT = process.env.PORT || Math.floor(Math.random() * (65535 - 1024) + 1024);
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
